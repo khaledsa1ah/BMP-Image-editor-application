@@ -19,7 +19,7 @@ int readGSBMP(const char* filename, unsigned char image[][SIZE]);
 // write grayscale image to the file specified by filename, from outputImage
 int writeGSBMP(const char* filename, unsigned char outputImage[][SIZE]);
 
-// display grayscale image with eog, pause 0.2 seconds. (uses a temp file)
+// Display grayscale image with eog, pause 0.2 seconds. (uses a temp file)
 void showGSBMP(unsigned char inputImage[][SIZE]);
 
 
