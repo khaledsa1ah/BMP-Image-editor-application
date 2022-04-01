@@ -161,26 +161,6 @@ void saveImage() {
 }
 
 void darkandLight() {
-    cout << "What do you want to do?\n(D)arken the picture"
-            "\n(L)ighten the picture\n>>";
-    char choice;
-    cin >> choice;
-    if (toupper(choice) == 'D') {
-        for (auto &i: image) {
-            for (unsigned char &j: i) {
-                int value = j;
-                j = (value) / 2;
-            }
-        }
-    } else if (toupper(choice) == 'L') {
-        for (auto &i: image) {
-            for (unsigned char &j: i) {
-                int value = j;
-                j = (value + 255) / 2;
-            }
-        }
-    }
-    saveImage();
 }
 
 
@@ -229,12 +209,6 @@ void rotate() {
 }
 
 void invert() {
-    for (auto &i: image) {
-        for (unsigned char &j: i) {
-            j = 255 - j;
-        }
-    }
-    saveImage();
 }
 
 void flip() {
