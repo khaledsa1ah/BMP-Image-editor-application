@@ -209,40 +209,7 @@ void flip() {
 }
 
 
-void filter_A() {
-    cout << "Mirror (l)eft, (r)ight, (u)pper, (d)own side?"
-                    "\n>>";
-    char choice;
-    cin >> choice;
-    if (choice == 'd') {
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                image[i][j] = image[255 - i][j];
-            }
-        }
-    } else if (choice == 'u') {
 
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                image[255 - i][j] = image[i][j];
-            }
-        }
-    } else if (choice == 'l') {
-
-        for (auto &i: image) {
-            for (int j = 0; j < SIZE; j++) {
-                i[255 - j] = i[j];
-            }
-        }
-    } else if (choice == 'r') {
-
-        for (auto &i: image) {
-            for (int j = 0; j < SIZE; j++) {
-                i[j] = i[255 - j];
-            }
-        }
-    }
-}
 
 void filter_b() {
 
@@ -253,7 +220,41 @@ void filter_c() {
 }
 
 void filter_a() {
+        cout << "Mirror (l)eft, (r)ight, (u)pper, (d)own side?"
+            "\n>>";
+    char choice;
+    cin >> choice;
+    if (choice == 'd') {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                image[i][j] = image[255 - i][j];
+            }
+        }
+    }else if (choice == 'u') {
 
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                image[255-i][j] = image[i][j];;
+            }
+        }
+    }
+    else if (choice == 'l') {
+
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                image[i][255-j] = image[i][j];
+            }
+        }
+    }
+    else if (choice == 'r') {
+
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                image[i][j] = image[i][255-j];
+            }
+        }
+    }
+saveImage();
 }
 
 void enlarge_image() {
