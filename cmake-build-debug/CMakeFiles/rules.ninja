@@ -71,25 +71,6 @@ rule CXX_EXECUTABLE_LINKER__A3_1_Debug
 #############################################
 # Rule for compiling CXX files.
 
-rule CXX_COMPILER__A3_Debug
-  depfile = $DEP_FILE
-  deps = gcc
-  command = C:\mingw64\bin\c++.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
-  description = Building CXX object $out
-
-
-#############################################
-# Rule for linking CXX executable.
-
-rule CXX_EXECUTABLE_LINKER__A3_Debug
-  command = cmd.exe /C "$PRE_LINK && C:\mingw64\bin\c++.exe $FLAGS $LINK_FLAGS $in -o $TARGET_FILE -Wl,--out-implib,$TARGET_IMPLIB -Wl,--major-image-version,0,--minor-image-version,0 $LINK_PATH $LINK_LIBRARIES && $POST_BUILD"
-  description = Linking CXX executable $TARGET_FILE
-  restat = $RESTAT
-
-
-#############################################
-# Rule for compiling CXX files.
-
 rule CXX_COMPILER__A3_2_Debug
   depfile = $DEP_FILE
   deps = gcc
@@ -175,7 +156,7 @@ rule CUSTOM_COMMAND
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = "C:\Program Files\JetBrains\CLion 2021.3.2\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SC:\Users\KHALED\CLionProjects\A3 -BC:\Users\KHALED\CLionProjects\A3\cmake-build-debug
+  command = "C:\Program Files\JetBrains\CLion 2021.3.2\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SC:\Users\KHALED\Documents\GitHub\Assignment-3 -BC:\Users\KHALED\Documents\GitHub\Assignment-3\cmake-build-debug
   description = Re-running CMake...
   generator = 1
 

@@ -7,6 +7,8 @@
 // Teaching Assistant: xxxxx xxxxx
 // Purpose:..........
 
+//demo
+
 #include <iostream>
 #include <cstring>
 #include "bmplib.cpp"

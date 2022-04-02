@@ -39,7 +39,7 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = C$:/Users/KHALED/CLionProjects/A3/cmake-build-debug/
+cmake_ninja_workdir = C$:/Users/KHALED/Documents/GitHub/Assignment-3/cmake-build-debug/
 # =============================================================================
 # Object build statements for EXECUTABLE target The_project
 
@@ -49,7 +49,7 @@ cmake_ninja_workdir = C$:/Users/KHALED/CLionProjects/A3/cmake-build-debug/
 
 build cmake_object_order_depends_target_The_project: phony || CMakeFiles/The_project.dir
 
-build CMakeFiles/The_project.dir/BMP_Editor.cpp.obj: CXX_COMPILER__The_project_Debug C$:/Users/KHALED/CLionProjects/A3/BMP$ Editor.cpp || cmake_object_order_depends_target_The_project
+build CMakeFiles/The_project.dir/BMP_Editor.cpp.obj: CXX_COMPILER__The_project_Debug C$:/Users/KHALED/Documents/GitHub/Assignment-3/BMP$ Editor.cpp || cmake_object_order_depends_target_The_project
   DEP_FILE = CMakeFiles\The_project.dir\BMP_Editor.cpp.obj.d
   FLAGS = -g -std=gnu++14
   OBJECT_DIR = CMakeFiles\The_project.dir
@@ -82,7 +82,7 @@ build The_project.exe: CXX_EXECUTABLE_LINKER__The_project_Debug CMakeFiles/The_p
 
 build cmake_object_order_depends_target_A3_0: phony || CMakeFiles/A3_0.dir
 
-build CMakeFiles/A3_0.dir/main2.cpp.obj: CXX_COMPILER__A3_0_Debug C$:/Users/KHALED/CLionProjects/A3/main2.cpp || cmake_object_order_depends_target_A3_0
+build CMakeFiles/A3_0.dir/main2.cpp.obj: CXX_COMPILER__A3_0_Debug C$:/Users/KHALED/Documents/GitHub/Assignment-3/main2.cpp || cmake_object_order_depends_target_A3_0
   DEP_FILE = CMakeFiles\A3_0.dir\main2.cpp.obj.d
   FLAGS = -g -std=gnu++14
   OBJECT_DIR = CMakeFiles\A3_0.dir
@@ -115,7 +115,7 @@ build A3_0.exe: CXX_EXECUTABLE_LINKER__A3_0_Debug CMakeFiles/A3_0.dir/main2.cpp.
 
 build cmake_object_order_depends_target_A3_1: phony || CMakeFiles/A3_1.dir
 
-build CMakeFiles/A3_1.dir/demo.cpp.obj: CXX_COMPILER__A3_1_Debug C$:/Users/KHALED/CLionProjects/A3/demo.cpp || cmake_object_order_depends_target_A3_1
+build CMakeFiles/A3_1.dir/demo.cpp.obj: CXX_COMPILER__A3_1_Debug C$:/Users/KHALED/Documents/GitHub/Assignment-3/demo.cpp || cmake_object_order_depends_target_A3_1
   DEP_FILE = CMakeFiles\A3_1.dir\demo.cpp.obj.d
   FLAGS = -g -std=gnu++14
   OBJECT_DIR = CMakeFiles\A3_1.dir
@@ -140,39 +140,6 @@ build A3_1.exe: CXX_EXECUTABLE_LINKER__A3_1_Debug CMakeFiles/A3_1.dir/demo.cpp.o
   TARGET_PDB = A3_1.exe.dbg
 
 # =============================================================================
-# Object build statements for EXECUTABLE target A3
-
-
-#############################################
-# Order-only phony target for A3
-
-build cmake_object_order_depends_target_A3: phony || CMakeFiles/A3.dir
-
-build CMakeFiles/A3.dir/BW.cpp.obj: CXX_COMPILER__A3_Debug C$:/Users/KHALED/CLionProjects/A3/BW.cpp || cmake_object_order_depends_target_A3
-  DEP_FILE = CMakeFiles\A3.dir\BW.cpp.obj.d
-  FLAGS = -g -std=gnu++14
-  OBJECT_DIR = CMakeFiles\A3.dir
-  OBJECT_FILE_DIR = CMakeFiles\A3.dir
-
-
-# =============================================================================
-# Link build statements for EXECUTABLE target A3
-
-
-#############################################
-# Link the executable A3.exe
-
-build A3.exe: CXX_EXECUTABLE_LINKER__A3_Debug CMakeFiles/A3.dir/BW.cpp.obj
-  FLAGS = -g
-  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = CMakeFiles\A3.dir
-  POST_BUILD = cd .
-  PRE_LINK = cd .
-  TARGET_FILE = A3.exe
-  TARGET_IMPLIB = libA3.dll.a
-  TARGET_PDB = A3.exe.dbg
-
-# =============================================================================
 # Object build statements for EXECUTABLE target A3_2
 
 
@@ -181,7 +148,7 @@ build A3.exe: CXX_EXECUTABLE_LINKER__A3_Debug CMakeFiles/A3.dir/BW.cpp.obj
 
 build cmake_object_order_depends_target_A3_2: phony || CMakeFiles/A3_2.dir
 
-build CMakeFiles/A3_2.dir/Dark_bright.cpp.obj: CXX_COMPILER__A3_2_Debug C$:/Users/KHALED/CLionProjects/A3/Dark_bright.cpp || cmake_object_order_depends_target_A3_2
+build CMakeFiles/A3_2.dir/Dark_bright.cpp.obj: CXX_COMPILER__A3_2_Debug C$:/Users/KHALED/Documents/GitHub/Assignment-3/Dark_bright.cpp || cmake_object_order_depends_target_A3_2
   DEP_FILE = CMakeFiles\A3_2.dir\Dark_bright.cpp.obj.d
   FLAGS = -g -std=gnu++14
   OBJECT_DIR = CMakeFiles\A3_2.dir
@@ -214,7 +181,7 @@ build A3_2.exe: CXX_EXECUTABLE_LINKER__A3_2_Debug CMakeFiles/A3_2.dir/Dark_brigh
 
 build cmake_object_order_depends_target_A3_3: phony || CMakeFiles/A3_3.dir
 
-build CMakeFiles/A3_3.dir/flip.cpp.obj: CXX_COMPILER__A3_3_Debug C$:/Users/KHALED/CLionProjects/A3/flip.cpp || cmake_object_order_depends_target_A3_3
+build CMakeFiles/A3_3.dir/flip.cpp.obj: CXX_COMPILER__A3_3_Debug C$:/Users/KHALED/Documents/GitHub/Assignment-3/flip.cpp || cmake_object_order_depends_target_A3_3
   DEP_FILE = CMakeFiles\A3_3.dir\flip.cpp.obj.d
   FLAGS = -g -std=gnu++14
   OBJECT_DIR = CMakeFiles\A3_3.dir
@@ -247,7 +214,7 @@ build A3_3.exe: CXX_EXECUTABLE_LINKER__A3_3_Debug CMakeFiles/A3_3.dir/flip.cpp.o
 
 build cmake_object_order_depends_target_A3_4: phony || CMakeFiles/A3_4.dir
 
-build CMakeFiles/A3_4.dir/rotate.cpp.obj: CXX_COMPILER__A3_4_Debug C$:/Users/KHALED/CLionProjects/A3/rotate.cpp || cmake_object_order_depends_target_A3_4
+build CMakeFiles/A3_4.dir/rotate.cpp.obj: CXX_COMPILER__A3_4_Debug C$:/Users/KHALED/Documents/GitHub/Assignment-3/rotate.cpp || cmake_object_order_depends_target_A3_4
   DEP_FILE = CMakeFiles\A3_4.dir\rotate.cpp.obj.d
   FLAGS = -g -std=gnu++14
   OBJECT_DIR = CMakeFiles\A3_4.dir
@@ -280,7 +247,7 @@ build A3_4.exe: CXX_EXECUTABLE_LINKER__A3_4_Debug CMakeFiles/A3_4.dir/rotate.cpp
 
 build cmake_object_order_depends_target_A3_5: phony || CMakeFiles/A3_5.dir
 
-build CMakeFiles/A3_5.dir/filter_A.cpp.obj: CXX_COMPILER__A3_5_Debug C$:/Users/KHALED/CLionProjects/A3/filter_A.cpp || cmake_object_order_depends_target_A3_5
+build CMakeFiles/A3_5.dir/filter_A.cpp.obj: CXX_COMPILER__A3_5_Debug C$:/Users/KHALED/Documents/GitHub/Assignment-3/filter_A.cpp || cmake_object_order_depends_target_A3_5
   DEP_FILE = CMakeFiles\A3_5.dir\filter_A.cpp.obj.d
   FLAGS = -g -std=gnu++14
   OBJECT_DIR = CMakeFiles\A3_5.dir
@@ -309,7 +276,7 @@ build A3_5.exe: CXX_EXECUTABLE_LINKER__A3_5_Debug CMakeFiles/A3_5.dir/filter_A.c
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\KHALED\CLionProjects\A3\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2021.3.2\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D C:\Users\KHALED\Documents\GitHub\Assignment-3\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2021.3.2\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -320,7 +287,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\KHALED\CLionProjects\A3\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2021.3.2\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SC:\Users\KHALED\CLionProjects\A3 -BC:\Users\KHALED\CLionProjects\A3\cmake-build-debug"
+  COMMAND = cmd.exe /C "cd /D C:\Users\KHALED\Documents\GitHub\Assignment-3\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2021.3.2\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SC:\Users\KHALED\Documents\GitHub\Assignment-3 -BC:\Users\KHALED\Documents\GitHub\Assignment-3\cmake-build-debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -329,8 +296,6 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 # =============================================================================
 # Target aliases.
-
-build A3: phony A3.exe
 
 build A3_0: phony A3_0.exe
 
@@ -352,9 +317,9 @@ build The_project: phony The_project.exe
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/KHALED/CLionProjects/A3/cmake-build-debug
+# Folder: C:/Users/KHALED/Documents/GitHub/Assignment-3/cmake-build-debug
 
-build all: phony The_project.exe A3_0.exe A3_1.exe A3.exe A3_2.exe A3_3.exe A3_4.exe A3_5.exe
+build all: phony The_project.exe A3_0.exe A3_1.exe A3_2.exe A3_3.exe A3_4.exe A3_5.exe
 
 # =============================================================================
 # Built-in targets
