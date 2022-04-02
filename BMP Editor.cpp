@@ -9,6 +9,7 @@
 
 //demo
 //بجرب حاجة
+//شغال؟
 
 #include <iostream>
 #include <cstring>
