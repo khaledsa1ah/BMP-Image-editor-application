@@ -8,7 +8,7 @@
 // Purpose:..........
 
 //demo
-//looooool
+//بجرب حاجة
 
 #include <iostream>
 #include <cstring>
