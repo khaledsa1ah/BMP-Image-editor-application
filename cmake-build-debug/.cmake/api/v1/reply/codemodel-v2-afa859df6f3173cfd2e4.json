@@ -1,0 +1,114 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.21"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "A3",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "A3_0::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-A3_0-Debug-bd938cdf178a46cdd742.json",
+					"name" : "A3_0",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "A3_1::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-A3_1-Debug-0c4fb5c8b7c8b0bd29bf.json",
+					"name" : "A3_1",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "A3_2::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-A3_2-Debug-333048581dcc9f48c76c.json",
+					"name" : "A3_2",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "A3_3::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-A3_3-Debug-d13c843a85d6f3e76aa8.json",
+					"name" : "A3_3",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "A3_4::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-A3_4-Debug-a9b6f4949eef7bfa4020.json",
+					"name" : "A3_4",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "A3_5::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-A3_5-Debug-fd9b1351a8fb2f444fb5.json",
+					"name" : "A3_5",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "The_project::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-The_project-Debug-43360191d6318a26a9cc.json",
+					"name" : "The_project",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/KHALED/Documents/GitHub/Assignment-3/cmake-build-debug",
+		"source" : "C:/Users/KHALED/Documents/GitHub/Assignment-3"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}
