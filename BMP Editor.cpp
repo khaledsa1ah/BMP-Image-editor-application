@@ -7,15 +7,13 @@
 // Teaching Assistant: xxxxx xxxxx
 // Purpose:..........
 
-//demo
-//بجرب حاجة
+
 
 #include <iostream>
 #include <cstring>
 #include "bmplib.cpp"
 
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "OCUnusedMacroInspection"
+
 #define RED     "\033[31m"      /* Red */
 
 
