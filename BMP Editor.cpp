@@ -9,8 +9,7 @@
 
 //demo
 //بجرب حاجة
-//شغال؟
-//اخر مرة
+
 #include <iostream>
 #include <cstring>
 #include "bmplib.cpp"
