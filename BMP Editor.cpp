@@ -178,13 +178,6 @@ void BW() {
 }
 
 void merge() {
-    load_2_images();
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
-            new_image[i][j] = (image[i][j] + image2[i][j]) / 2;
-        }
-    }
-    save_new_Image();
 }
 
 void rotate() {
