@@ -188,25 +188,6 @@ void merge() {
 }
 
 void rotate() {
-    cout << "Rotate (90), (180) or (360) degrees?"
-                    "\n>>";
-    string choice;
-    cin >> choice;
-    if (choice == "180") {
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                new_image[i][j] = image[255 - i][255 - j];
-            }
-        }
-    } else if (choice == "90") {
-
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                new_image[j][i] = image[255 - i][j];
-            }
-        }
-    }
-    save_new_Image();
 }
 
 void invert() {
