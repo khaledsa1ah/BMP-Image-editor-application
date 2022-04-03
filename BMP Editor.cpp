@@ -8,7 +8,6 @@
 // Purpose:..........
 
 
-// فلاحة؟
 #include <iostream>
 #include <cstring>
 #include "bmplib.cpp"
