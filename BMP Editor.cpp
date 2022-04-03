@@ -148,7 +148,6 @@ void save_new_Image() {
 }
 
 
-
 void saveImage() {
     char imageFileName[100];
 
@@ -188,7 +187,7 @@ void invert() {
 
 void flip() {
     cout << "Flip (h)orizontally or (v)ertically ?"
-                    "\n>>";
+            "\n>>";
     char choice;
     cin >> choice;
     if (tolower(choice) == 'v') {
@@ -209,8 +208,6 @@ void flip() {
 }
 
 
-
-
 void filter_b() {
 
 }
@@ -220,7 +217,7 @@ void filter_c() {
 }
 
 void filter_a() {
-        cout << "Mirror (l)eft, (r)ight, (u)pper, (d)own side?"
+    cout << "Mirror (l)eft, (r)ight, (u)pper, (d)own side?"
             "\n>>";
     char choice;
     cin >> choice;
@@ -230,31 +227,29 @@ void filter_a() {
                 image[i][j] = image[255 - i][j];
             }
         }
-    }else if (choice == 'u') {
+    } else if (choice == 'u') {
 
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                image[255-i][j] = image[i][j];;
+                image[255 - i][j] = image[i][j];;
             }
         }
-    }
-    else if (choice == 'l') {
+    } else if (choice == 'l') {
 
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                image[i][255-j] = image[i][j];
+                image[i][255 - j] = image[i][j];
             }
         }
-    }
-    else if (choice == 'r') {
+    } else if (choice == 'r') {
 
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                image[i][j] = image[i][255-j];
+                image[i][j] = image[i][255 - j];
             }
         }
     }
-saveImage();
+    saveImage();
 }
 
 void enlarge_image() {
@@ -277,9 +272,9 @@ void detect_edges() {
     }
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
-            new_image[i][j] = (image[i - 1][j - 1] * 0) + (image[i][j - 1] * 1) + (image[i + 1][j - 1] * 0) +
-                              (image[i - 1][j] * 1) + (image[i][j] * -4) + (image[i + 1][j] * 1) +
-                              (image[i - 1][j + 1] * 0) + (image[i][j + 1] * 1) + (image[i + 1][j + 1] * 0);
+            new_image[i][j] =
+                    (image[i][j - 1] * 1) + (image[i - 1][j] * 1) + (image[i][j] * -4) + (image[i + 1][j] * 1) +
+                    (image[i][j + 1] * 1);
         }
     }
 
