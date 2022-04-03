@@ -7,10 +7,7 @@
 // Teaching Assistant: xxxxx xxxxx
 // Purpose:..........
 
-//comment
 
-
-// فلاحة؟
 #include <iostream>
 #include <cstring>
 #include "bmplib.cpp"
