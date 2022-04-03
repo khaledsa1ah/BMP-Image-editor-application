@@ -298,8 +298,8 @@ void detect_edges() {
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
             new_image[i][j] =
-                    (image[i][j - 1] * 1) + (image[i - 1][j] * 1) + (image[i][j] * -4) + (image[i + 1][j] * 1) +
-                    (image[i][j + 1] * 1);
+                    (image[i][j - 1]) + (image[i - 1][j]) + (image[i][j] * -4) + (image[i + 1][j]) +
+                    (image[i][j + 1]);
         }
     }
 
