@@ -180,11 +180,36 @@ void merge() {
 }
 
 void rotate() {
+    int degree;
+    cout << "Enter the degree you want the image be rotated by :";
+    cin >> degree;
+    if(degree==270){
+        for(int i=0;i<SIZE;i++){
+            for(int j=0;j<SIZE;j++){
+                new_image[255-j][i]=image[i][j];
+            }
+        }}
+    else if(degree==180){
+        for(int i=0;i<SIZE;i++){
+            for(int j=0;j<SIZE;j++){
+                new_image[255-i][255-j]=image[i][j];
+            }}}
+
+    else if(degree==90){
+        for(int i=0;i<SIZE;i++){
+            for(int j=0;j<SIZE;j++){
+                new_image[j][255-i]=image[i][j];
+            }}}
+    save_new_Image();
 }
 
-void invert() {
+void invert(){
+    for(int i=0;i<SIZE;i++){
+        for(int j=0;j<SIZE;j++){
+            image[i][j]=255-image[i][j];
+        }}
+    saveImage();
 }
-
 void flip() {
     cout << "Flip (h)orizontally or (v)ertically ?"
             "\n>>";
