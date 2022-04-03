@@ -3,12 +3,13 @@
 // Last Modification Date: 02-04-2022
 // Author1 and ID and Group: Aya Ali Hassan & 20210083 & A
 // Author2 and ID and Group: Khaled Salah Abbas & 20211033 & A
-// Author3 and ID and Group: xxxxx xxxxx
+// Author3 and ID and Group: Youssef Mohammed Morad & 20210485 & A
 // Teaching Assistant: xxxxx xxxxx
 // Purpose:..........
 
 
 #include <iostream>
+#include <regex>
 #include <cstring>
 #include "bmplib.cpp"
 
@@ -38,6 +39,8 @@ void detect_edges();
 void save_new_Image();
 
 void darkandLight();
+void darken();
+void lighten();
 
 void rotate();
 
@@ -54,8 +57,8 @@ void shrink_image();
 int main() {
     cout << RED;
     cout << "Ahlan ya user ya habibi \uF04A\n";
-    loadImage();
     while (true) {
+        loadImage();
         cout << "Please select a filter to apply or 0 to exit:\n"
                 "1- Black & White Filter\n"
                 "2- Invert Filter\n"
@@ -69,7 +72,7 @@ int main() {
                 "a- Mirror 1/2 Image\n"
                 "b- Shuffle Image\n"
                 "c- Blur Image\n"
-                "s- Save the image to a file\n"
+                "s- Save the image to a file(demo)\n"
                 "0- Exit\n"
                 ">>";
         char option;
@@ -106,6 +109,7 @@ int main() {
 
 }
 
+//_________________________________________
 void load_2_images() {
     char seconed_imageFileName[100];
 
@@ -135,6 +139,7 @@ void loadImage() {
     //readGSBMP("Black.bmp", image);
 }
 
+//_________________________________________
 void save_new_Image() {
     char imageFileName[100];
 
@@ -160,10 +165,43 @@ void saveImage() {
     writeGSBMP(imageFileName, image);
 }
 
+//_________________________________________
 void darkandLight() {
+    string choice;
+    cout << "Enter 1 if you want to lighten your image\nEnter 2 if you want to darken your image\n";
+    cin >> choice;
+
+    while(choice != "1" && choice != "2"){
+        cout << "Please enter a valid choice\n";
+        cin >> choice;
+    }
+
+    if(choice == "1"){
+        lighten();
+    }
+    else{
+        darken();
+    }
+    save_new_Image();
 }
 
+void lighten(){
+    for(int i = 0; i < SIZE; i++){
+        for(int j = 0; j < SIZE; j++){
+            new_image[i][j] = (image[i][j] + 255)/2;
+        }
+    }
+}
 
+void darken(){
+    for(int i = 0; i < SIZE; i++){
+        for(int j = 0; j < SIZE; j++){
+            new_image[i][j] = image[i][j]/2;
+        }
+    }
+}
+
+//_________________________________________
 void BW() {
     for (auto &i: image) {
         for (unsigned char &j: i) {
@@ -176,9 +214,18 @@ void BW() {
     saveImage();
 }
 
+//_________________________________________
 void merge() {
+    load_2_images();
+    for(int i = 0; i < SIZE; i++){
+        for(int j = 0; j < SIZE; j++){
+            new_image[i][j] = (image[i][j] + image2[i][j])/2;
+        }
+    }
+    save_new_Image();
 }
 
+//_________________________________________
 void rotate() {
     int degree;
     cout << "Enter the degree you want the image be rotated by :";
@@ -203,6 +250,7 @@ void rotate() {
     save_new_Image();
 }
 
+//_________________________________________
 void invert(){
     for(int i=0;i<SIZE;i++){
         for(int j=0;j<SIZE;j++){
@@ -210,6 +258,8 @@ void invert(){
         }}
     saveImage();
 }
+
+//_________________________________________
 void flip() {
     cout << "Flip (h)orizontally or (v)ertically ?"
             "\n>>";
@@ -232,15 +282,53 @@ void flip() {
     save_new_Image();
 }
 
-
+//_________________________________________
 void filter_b() {
 
 }
 
+//_________________________________________
 void filter_c() {
+    string radius_;
+    cout << "Please enter the radius you want to blur your image with:\n";
 
+    // taking radius input from user
+    cin >> radius_;
+    regex validChoice("0*[1-9][0-9]*");
+    while(!regex_match(radius_, validChoice)){
+        cout << "Please enter a valid radius:\n";
+        cin >> radius_;
+    }
+
+    int radius = stoi(radius_);
+
+    for(int i = radius; i < SIZE-radius; i++){ // loop for every possible row that has the needed radius around (without going out of boundaries)
+        for(int j = radius; j < SIZE-radius; j++){ // loop for every possible column that has the needed radius around (without going out of boundaries)
+
+            // ave variable to calculate the color of the blured pixel by getting the average color of a group of pixels
+            int ave = 0;
+
+            // adding the color of these group of pixels then diving by the number of them
+            for(int k = i - radius; k <= i+radius; k++){
+                for(int l = j - radius; l <= j+radius; l++){
+                    ave += image[k][l];
+                }
+            }
+            ave /= (2 * radius + 1) * (2 * radius + 1);
+
+            // filling the correspondent pixels with the blured average in the new image
+            for(int k = i - radius; k <= i+radius; k++){
+                for(int l = j - radius; l <= j+radius; l++){
+                    new_image[k][l] = ave;
+                }
+            }
+
+        }
+    }
+    save_new_Image();
 }
 
+//_________________________________________
 void filter_a() {
     cout << "Mirror (l)eft, (r)ight, (u)pper, (d)own side?"
             "\n>>";
@@ -277,14 +365,77 @@ void filter_a() {
     saveImage();
 }
 
+//_________________________________________
 void enlarge_image() {
 
 }
 
+//_________________________________________
 void shrink_image() {
 
+    cout << "How much do you want to shrink your image?\n"
+            "The program will shrink it for 1/(a) of the image original dimensions\n"
+            "Enter a:";
+
+    string choice;
+    int nCombinedPixels;
+    cin >> choice;
+
+    regex validChoice("0*[1-9][0-9]*");
+    while(!regex_match(choice, validChoice)){
+        cout << "Please enter a valid choice:\n";
+        cin >> choice;
+    }
+
+    nCombinedPixels = stoi(choice);
+
+    // shrinking horizontally (a row will have fewer columns)
+    for(int i = 0; i < SIZE; i++){ // loop over all rows of new image
+
+        //the start of the columns (in the same row) to take their average
+        int st = 0;
+
+        for(int j = 0; j < SIZE/nCombinedPixels; j++){ // loop over the needed columns to fill
+
+            // the average color in the new pixel
+            int ave = 0;
+            for(int k = st; k < st + nCombinedPixels; k++){
+                ave += image[i][k];
+            }
+
+            // save the new color in the original image (as we're not done of shrinking yet)
+            image[i][j] = ave/(nCombinedPixels);
+
+            // the new start of the next 2 columns to get their average
+            st+=nCombinedPixels;
+        }
+    }
+
+    // shrinking vertically after the horizontally (a column will have fewer rows)
+    for(int i = 0; i < SIZE/nCombinedPixels; i++){ // loop over needed columns of new image to fill
+
+        // the start of the rows (in the same column) to take their average
+        int st = 0;
+
+        for(int j = 0; j < SIZE/nCombinedPixels; j++){
+
+            // the average color in the new pixel
+            int ave = 0;
+            for(int k = st; k < st + nCombinedPixels; k++){
+                ave += image[k][i];
+            }
+
+            // save the new color in the new image (shrinking is done for this pixel)
+            new_image[j][i] = ave/(nCombinedPixels);
+
+            // the new start of the next 2 rows to get their average
+            st+=nCombinedPixels;
+        }
+    }
+    save_new_Image();
 }
 
+//_________________________________________
 void detect_edges() {
 
     for (int i = 0; i < SIZE; i++) {
