@@ -152,7 +152,7 @@ void save_new_Image() {
     writeGSBMP(imageFileName, new_image);
 }
 
-
+//_________________________________________
 void saveImage() {
     char imageFileName[100];
 
@@ -184,7 +184,7 @@ void darkandLight() {
     }
     save_new_Image();
 }
-
+//_________________________________________
 void lighten(){
     for(int i = 0; i < SIZE; i++){
         for(int j = 0; j < SIZE; j++){
@@ -192,7 +192,7 @@ void lighten(){
         }
     }
 }
-
+//_________________________________________
 void darken(){
     for(int i = 0; i < SIZE; i++){
         for(int j = 0; j < SIZE; j++){
