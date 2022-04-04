@@ -1,11 +1,11 @@
 // FCI – Programming 1 – 2022 - Assignment 3 
-// Program Name: xxxxxx.cpp
+// Program Name: BMP Image Editor.cpp
 // Last Modification Date: 02-04-2022
 // Author1 and ID and Group: Aya Ali Hassan & 20210083 & A
 // Author2 and ID and Group: Khaled Salah Abbas & 20211033 & A
 // Author3 and ID and Group: Youssef Mohammed Morad & 20210485 & A
-// Teaching Assistant: xxxxx xxxxx
-// Purpose:..........
+// Teaching Assistant: Eng. Nesma
+// Purpose: ..........
 
 
 #include <iostream>
@@ -111,17 +111,17 @@ int main() {
 
 //_________________________________________
 void load_2_images() {
-    char seconed_imageFileName[100];
+    char second_imageFileName[100];
 
     // Get gray scale image file name
 
     cout << "Please enter file name of the image you want to merge with."
             "\n>>";
-    cin >> seconed_imageFileName;
+    cin >> second_imageFileName;
 
     // Add to it .bmp extension and load image
-    strcat(seconed_imageFileName, ".bmp");
-    readGSBMP(seconed_imageFileName, image2);
+    strcat(second_imageFileName, ".bmp");
+    readGSBMP(second_imageFileName, image2);
     //readGSBMP("Black.bmp", image);
 }
 
@@ -252,9 +252,9 @@ void rotate() {
 
 //_________________________________________
 void invert(){
-    for(int i=0;i<SIZE;i++){
-        for(int j=0;j<SIZE;j++){
-            image[i][j]=255-image[i][j];
+    for(auto & i : image){
+        for(unsigned char & j : i){
+            j=255-j;
         }}
     saveImage();
 }
@@ -305,7 +305,7 @@ void filter_c() {
     for(int i = radius; i < SIZE-radius; i++){ // loop for every possible row that has the needed radius around (without going out of boundaries)
         for(int j = radius; j < SIZE-radius; j++){ // loop for every possible column that has the needed radius around (without going out of boundaries)
 
-            // ave variable to calculate the color of the blured pixel by getting the average color of a group of pixels
+            // ave variable to calculate the color of the blurred pixel by getting the average color of a group of pixels
             int ave = 0;
 
             // adding the color of these group of pixels then diving by the number of them
@@ -316,7 +316,7 @@ void filter_c() {
             }
             ave /= (2 * radius + 1) * (2 * radius + 1);
 
-            // filling the correspondent pixels with the blured average in the new image
+            // filling the correspondent pixels with the blurred average in the new image
             for(int k = i - radius; k <= i+radius; k++){
                 for(int l = j - radius; l <= j+radius; l++){
                     new_image[k][l] = ave;
@@ -344,21 +344,21 @@ void filter_a() {
 
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                image[255 - i][j] = image[i][j];;
+                image[255 - i][j] = image[i][j];
             }
         }
     } else if (choice == 'l') {
 
-        for (int i = 0; i < SIZE; i++) {
+        for (auto & i : image) {
             for (int j = 0; j < SIZE; j++) {
-                image[i][255 - j] = image[i][j];
+                i[255 - j] = i[j];
             }
         }
     } else if (choice == 'r') {
 
-        for (int i = 0; i < SIZE; i++) {
+        for (auto & i : image) {
             for (int j = 0; j < SIZE; j++) {
-                image[i][j] = image[i][255 - j];
+                i[j] = i[255 - j];
             }
         }
     }
@@ -390,7 +390,7 @@ void shrink_image() {
     nCombinedPixels = stoi(choice);
 
     // shrinking horizontally (a row will have fewer columns)
-    for(int i = 0; i < SIZE; i++){ // loop over all rows of new image
+    for(auto & i : image){ // loop over all rows of new image
 
         //the start of the columns (in the same row) to take their average
         int st = 0;
@@ -400,11 +400,11 @@ void shrink_image() {
             // the average color in the new pixel
             int ave = 0;
             for(int k = st; k < st + nCombinedPixels; k++){
-                ave += image[i][k];
+                ave += i[k];
             }
 
             // save the new color in the original image (as we're not done of shrinking yet)
-            image[i][j] = ave/(nCombinedPixels);
+            i[j] = ave/(nCombinedPixels);
 
             // the new start of the next 2 columns to get their average
             st+=nCombinedPixels;
@@ -438,18 +438,18 @@ void shrink_image() {
 //_________________________________________
 void detect_edges() {
 
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
-            if (image[i][j] > 127)
-                image[i][j] = 255;
+    for (auto & i : image) {
+        for (unsigned char & j : i) {
+            if (j > 127)
+                j = 255;
             else
-                image[i][j] = 0;
+                j = 0;
         }
     }
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
             new_image[i][j] =
-                    (image[i][j - 1]) + (image[i - 1][j]) + (image[i][j] * -4) + (image[i + 1][j]) +
+                    (image[i][j - 1]) + (image[i - 1][j]) + (image[i][j] *-4) + (image[i + 1][j]) +
                     (image[i][j + 1]);
         }
     }
