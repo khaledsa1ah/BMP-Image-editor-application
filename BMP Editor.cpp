@@ -265,13 +265,13 @@ void flip() {
             "\n>>";
     char choice;
     cin >> choice;
-    if (tolower(choice) == 'v') {
+    if (tolower(choice) == 'h') {
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 new_image[i][j] = image[255 - i][j];
             }
         }
-    } else if (tolower(choice) == 'h') {
+    } else if (tolower(choice) == 'v') {
 
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
