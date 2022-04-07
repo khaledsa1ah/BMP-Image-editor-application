@@ -75,17 +75,6 @@ build The_project.exe: CXX_EXECUTABLE_LINKER__The_project_Debug CMakeFiles/The_p
 
 
 #############################################
-# Utility command for edit_cache
-
-build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\KHALED\Documents\GitHub\Assignment-3\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2021.3.2\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
-  DESC = No interactive CMake dialog available...
-  restat = 1
-
-build edit_cache: phony CMakeFiles/edit_cache.util
-
-
-#############################################
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
@@ -97,7 +86,53 @@ build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
 build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 # =============================================================================
+# Object build statements for EXECUTABLE target 6_filters
+
+
+#############################################
+# Order-only phony target for 6_filters
+
+build cmake_object_order_depends_target_6_filters: phony || CMakeFiles/6_filters.dir
+
+build CMakeFiles/6_filters.dir/6-filters.cpp.obj: CXX_COMPILER__6_filters_Debug C$:/Users/KHALED/Documents/GitHub/Assignment-3/6-filters.cpp || cmake_object_order_depends_target_6_filters
+  DEP_FILE = CMakeFiles\6_filters.dir\6-filters.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles\6_filters.dir
+  OBJECT_FILE_DIR = CMakeFiles\6_filters.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target 6_filters
+
+
+#############################################
+# Link the executable 6_filters.exe
+
+build 6_filters.exe: CXX_EXECUTABLE_LINKER__6_filters_Debug CMakeFiles/6_filters.dir/6-filters.cpp.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\6_filters.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = 6_filters.exe
+  TARGET_IMPLIB = lib6_filters.dll.a
+  TARGET_PDB = 6_filters.exe.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\KHALED\Documents\GitHub\Assignment-3\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2021.3.2\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build edit_cache: phony CMakeFiles/edit_cache.util
+
+# =============================================================================
 # Target aliases.
+
+build 6_filters: phony 6_filters.exe
 
 build The_project: phony The_project.exe
 
@@ -109,7 +144,7 @@ build The_project: phony The_project.exe
 #############################################
 # Folder: C:/Users/KHALED/Documents/GitHub/Assignment-3/cmake-build-debug
 
-build all: phony The_project.exe
+build all: phony The_project.exe 6_filters.exe
 
 # =============================================================================
 # Built-in targets
