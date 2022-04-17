@@ -370,8 +370,41 @@ void filter_a() {
 
 //_________________________________________
 void enlarge_image() {
-
-}
+    int Quarter;
+    cout << "Enter the quarter you want to enlarge :";
+    cin >> Quarter;
+    while (Quarter > 5 or Quarter < 0) {
+        cout << "Enter a valid number :";
+        cin >> Quarter;
+    }
+    if(Quarter==1){
+        for(int i=0;i<256;i++){
+            for(int j=0;j<256;j++){
+                new_image[i][j]=image[i/2][j/2];
+                }}
+    }
+    else if(Quarter==2){
+        for(int i=0;i<256;i++){
+            for(int j=0;j<256;j++){
+                new_image[i][256-j]=image[i][256-j/2];
+                }
+            }
+    }
+    else if(Quarter==3){
+        for(int i=0;i<256;i++){
+            for(int j=0;j<256;j++){
+                new_image[256-i][j]=image[256-i/2][j/2];
+                }
+            }
+    }
+    else if(Quarter==4){
+        for(int i=0;i<256;i++){
+            for(int j=0;j<256;j++){
+                new_image[256-i][256-j]=image[256-i/2][256-j/2];
+          }
+        }
+    }
+save_new_Image();}
 
 //_________________________________________
 void shrink_image() {
