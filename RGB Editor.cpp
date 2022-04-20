@@ -178,7 +178,15 @@ void BW() {
 }
 
 //_________________________________________
-void invert() {}
+void invert() {
+    for(int i=0;i<256;i++){
+        for(int j=0;j<256;j++){
+            for(int k=0;k<3;k++){
+                image[i][j][k]=255-image[i][j][k];
+                  }
+              }
+          }
+      saveImage();}
 
 //_________________________________________
 void merge() {}
@@ -248,13 +256,85 @@ void detect_edges() {
 void darkandLight() {}
 
 //_________________________________________
-void rotate() {}
+void rotate() {
+    int degree;
+    cout << "Enter the degree you want the image be rotated by :";
+    cin >> degree;
+    if (degree == 270) {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                for(int k=0;k<3;k++) {
+                    new_image[255 - j][i][k]= image[i][j][k];
+                     }
+                 }
+             }
+     }else if (degree == 180) {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                for(int k=0;k<3;k++) {
+                    new_image[255 - i][255 - j][k] = image[i][j][k];
+                     }
+                 }
+             }
+      } else if (degree == 90) {
+             for (int i = 0; i < SIZE; i++) {
+                 for (int j = 0; j < SIZE; j++) {
+                     for(int k=0;k<3;k++) {
+                         new_image[j][255 - i][k]= image[i][j][k];
+                     }
+                 }
+             }
+         }
+     save_new_Image();}
 
 //_________________________________________
 void shrink_image() {}
 
 //_________________________________________
-void enlarge_image() {}
+void enlarge_image() {
+    int Quarter;
+    cout << "Enter the quarter you want to enlarge :";
+    cin >> Quarter;
+    while (Quarter > 5 or Quarter < 0) {
+         cout << "Enter a valid number :";
+         cin >> Quarter;
+         }
+         if(Quarter==1){
+             for(int i=0;i<256;i++){
+                 for(int j=0;j<256;j++){
+                     for(int k=0;k<3;k++) {
+                         new_image[i][j][k] = image[i / 2][j / 2][k];
+                     }
+                 }}
+         }
+         else if(Quarter==2){
+             for(int i=0;i<256;i++){
+                 for(int j=0;j<256;j++){
+                     for(int k=0;k<3;k++) {
+                         new_image[i][256 - j][k] = image[i][256 - j / 2][k];
+                     }
+                 }
+             }
+         }
+         else if(Quarter==3){
+             for(int i=0;i<256;i++){
+                 for(int j=0;j<256;j++){
+                     for(int k=0;k<3;k++) {
+                         new_image[256 - i][j][k]= image[256 - i / 2][j / 2][k];
+                     }
+                 }
+             }
+         }
+         else if(Quarter==4){
+             for(int i=0;i<256;i++){
+                 for(int j=0;j<256;j++){
+                     for(int k=0;k<3;k++) {
+                         new_image[256 - i][256 - j][k] = image[256 - i / 2][256 - j / 2][k];
+                     }
+                 }
+             }
+         }
+         save_new_Image();}
 
 //_________________________________________
 void filter_a() {
@@ -297,7 +377,7 @@ void filter_a() {
 }
 
 //_________________________________________
-void filter_b() {}
+
 
 //_________________________________________
 void filter_c() {}
