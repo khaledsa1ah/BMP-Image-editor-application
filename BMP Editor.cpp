@@ -288,7 +288,6 @@ void flip() {
 //_________________________________________
 void filter_b() {
     string order;
-    int counter=0;
     unsigned char Quarter_1[SIZE][SIZE];
     unsigned char Quarter_2[SIZE][SIZE];
     unsigned char Quarter_3[SIZE][SIZE];
