@@ -292,7 +292,7 @@ void filter_b() {
     unsigned char Quarter_2[SIZE][SIZE];
     unsigned char Quarter_3[SIZE][SIZE];
     unsigned char Quarter_4[SIZE][SIZE];
-    cout<<"Enter the order of quarters you want the image be orderd by :"<<endl;
+    cout<<"Enter the order of quarters you want the image to be ordered by :"<<endl;
     getline(cin>>ws,order,'\n');
     for(int i=0;i<order.length();i++){
         if(order[i]==' '){
