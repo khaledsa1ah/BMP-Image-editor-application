@@ -377,7 +377,131 @@ void filter_a() {
 }
 
 //_________________________________________
+void filter_b() {
+        string order;
+         unsigned char Quarter_1[SIZE][SIZE][RGB];
+         unsigned char Quarter_2[SIZE][SIZE][RGB];
+         unsigned char Quarter_3[SIZE][SIZE][RGB];
+         unsigned char Quarter_4[SIZE][SIZE][RGB];
+         cout << "Enter the order of quarters you want the image to be ordered by :" << endl;
+         getline(cin >> ws, order, '\n');
+         for (int i = 0; i < order.length(); i++) {
+             if (order[i] == ' ') {
+                 order.erase(i, 1);
+             }
+         }
+         for (int i = 0; i < 4; i++) {
+             while (order[i] != '1' and order[i] != '2' and order[i] != '3' and order[i] != '4') {
+                 cout << "Please enter a valid order :" << endl;
+                 getline(cin >> ws, order, '\n');
+                for (int i = 0; i < order.length(); i++) {
+                     if (order[i] == ' ') {
+                         order.erase(i, 1);
+                    }
+                 }
+             }
+         }
+         for (int i = 0; i < 128; i++) {
+             for (int j = 0; j < 128; j++) {
+                 for(int k=0;k<3;k++) {
+                     Quarter_1[i][j][k] = image[i][j][k];
+                 }
+             }
+         }
+         for (int i = 0; i < 128; i++) {
+             for (int j = 128; j < 256; j++) {
+                 for(int k=0;k<3;k++) {
+                     Quarter_2[i][j][k] = image[i][j][k];
+                }
+             }
+        }
+         for (int i = 128; i < 256; i++) {
+             for (int j = 0; j < 128; j++) {
+                 for(int k=0;k<3;k++) {
+                     Quarter_3[i][j][k] = image[i][j][k];
+                 }
 
+             }
+         }
+         for (int i = 128; i < 256; i++) {
+             for (int j = 128; j < 256; j++) {
+                for(int k=0;k<3;k++) {
+                    Quarter_4[i][j][k] = image[i][j][k];
+                }
+            }
+         }
+         for (int k = 0; k < 4; k++) {
+             if (k == 0) {
+                 for (int i = 0; i < 128; i++) {
+                    for (int j = 0; j < 128; j++) {
+                        for(int k=0;k<3;k++) {
+                             if (order[0] == '1') {
+                                 new_mage[i][j][k] = Quarter_1[i][j][k];
+                           } else if (order[0] == '2') {
+                                 new_image[i][j][k] = Quarter_2[i][128 + j][k];
+                             } else if (order[0] == '3') {
+                                 new_image[i][j][k] = Quarter_3[128 + i][j][k];
+                             } else if (order[0] == '4') {
+                                new_image[i][j][k] = Quarter_4[128 + i][128 + j][k];
+                             }
+                         }
+                     }
+                 }
+
+             } else if (k == 1) {
+                 for (int i = 0; i < 128; i++) {
+                    for (int j = 128; j < 256; j++) {
+                         for(int k=0;k<3;k++) {
+                            if (order[1] == '1') {
+                                 new_image[i][j][k] = Quarter_1[i][j - 128][k];
+                             } else if (order[1] == '2') {
+                                new_image[i][j][k] = Quarter_2[i][j][k];
+                             } else if (order[1] == '3') {
+                                 new_image[i][j][k] = Quarter_3[128 + i][j - 128][k];
+                            } else if (order[1] == '4') {
+                                 new_image[i][j][k] = Quarter_4[128 + i][j][k];
+                             }
+                         }
+                     }
+                 }
+
+
+            } else if (k == 2) {
+                 for (int i = 128; i < 256; i++) {
+                     for (int j = 0; j < 128; j++) {
+                         for(int k=0;k<3;k++) {
+                            if (order[2] == '1') {
+                                 new_image[i][j][k] = Quarter_1[i - 128][j][k];
+                             } else if (order[2] == '2') {
+                                 new_image[i][j][k] = Quarter_2[i - 128][128 + j][k];
+                             } else if (order[2] == '3') {
+                                new_image[i][j][k] = Quarter_3[i][j][k];
+                             } else if (order[2] == '4') {
+                                 new_image[i][j][k] = Quarter_4[i][128 + j][k];
+                             }
+                         }
+                     }
+                 }
+            } else if (k == 3) {
+                 for (int i = 128; i < 256; i++) {
+                    for (int j = 128; j < 256; j++) {
+                        for(int k=0;k<3;k++) {
+                            if (order[3] == '1') {
+                                 new_image[i][j][k] = Quarter_1[i - 128][j - 128][k];
+                           } else if (order[3] == '2') {
+                                new_image[i][j][k] = Quarter_2[i - 128][j][k];
+                            } else if (order[3] == '3') {
+                                new_image[i][j][k] =Quarter_3[i][j-128][k];
+                             } else if (order[3] == '4') {
+                                 new_image[i][j][k] = Quarter_4[i][j][k];
+                             }
+                         }
+                    }
+                }
+             }
+         }
+
+    save_new_Image();}
 
 //_________________________________________
 void filter_c() {}
