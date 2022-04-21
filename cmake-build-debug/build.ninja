@@ -11,7 +11,7 @@
 # =============================================================================
 
 # =============================================================================
-# Project: A3
+# Project: Assignment-3
 # Configurations: Debug
 # =============================================================================
 
@@ -40,38 +40,115 @@ include CMakeFiles/rules.ninja
 # Logical path to working directory; prefix for absolute paths.
 
 cmake_ninja_workdir = C$:/Users/KHALED/Documents/GitHub/Assignment-3/cmake-build-debug/
+
+#############################################
+# Utility command for edit_cache
+
+build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\KHALED\Documents\GitHub\Assignment-3\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2021.3.2\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build edit_cache: phony CMakeFiles/edit_cache.util
+
 # =============================================================================
-# Object build statements for EXECUTABLE target The_project
+# Object build statements for EXECUTABLE target BMP
 
 
 #############################################
-# Order-only phony target for The_project
+# Order-only phony target for BMP
 
-build cmake_object_order_depends_target_The_project: phony || CMakeFiles/The_project.dir
+build cmake_object_order_depends_target_BMP: phony || CMakeFiles/BMP.dir
 
-build CMakeFiles/The_project.dir/BMP_Editor.cpp.obj: CXX_COMPILER__The_project_Debug C$:/Users/KHALED/Documents/GitHub/Assignment-3/BMP$ Editor.cpp || cmake_object_order_depends_target_The_project
-  DEP_FILE = CMakeFiles\The_project.dir\BMP_Editor.cpp.obj.d
+build CMakeFiles/BMP.dir/BMP_Editor.cpp.obj: CXX_COMPILER__BMP_Debug C$:/Users/KHALED/Documents/GitHub/Assignment-3/BMP$ Editor.cpp || cmake_object_order_depends_target_BMP
+  DEP_FILE = CMakeFiles\BMP.dir\BMP_Editor.cpp.obj.d
   FLAGS = -g -std=gnu++14
-  OBJECT_DIR = CMakeFiles\The_project.dir
-  OBJECT_FILE_DIR = CMakeFiles\The_project.dir
+  OBJECT_DIR = CMakeFiles\BMP.dir
+  OBJECT_FILE_DIR = CMakeFiles\BMP.dir
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target The_project
+# Link build statements for EXECUTABLE target BMP
 
 
 #############################################
-# Link the executable The_project.exe
+# Link the executable BMP.exe
 
-build The_project.exe: CXX_EXECUTABLE_LINKER__The_project_Debug CMakeFiles/The_project.dir/BMP_Editor.cpp.obj
+build BMP.exe: CXX_EXECUTABLE_LINKER__BMP_Debug CMakeFiles/BMP.dir/BMP_Editor.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = CMakeFiles\The_project.dir
+  OBJECT_DIR = CMakeFiles\BMP.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_FILE = The_project.exe
-  TARGET_IMPLIB = libThe_project.dll.a
-  TARGET_PDB = The_project.exe.dbg
+  TARGET_FILE = BMP.exe
+  TARGET_IMPLIB = libBMP.dll.a
+  TARGET_PDB = BMP.exe.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target RGB
+
+
+#############################################
+# Order-only phony target for RGB
+
+build cmake_object_order_depends_target_RGB: phony || CMakeFiles/RGB.dir
+
+build CMakeFiles/RGB.dir/RGB_Editor.cpp.obj: CXX_COMPILER__RGB_Debug C$:/Users/KHALED/Documents/GitHub/Assignment-3/RGB$ Editor.cpp || cmake_object_order_depends_target_RGB
+  DEP_FILE = CMakeFiles\RGB.dir\RGB_Editor.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles\RGB.dir
+  OBJECT_FILE_DIR = CMakeFiles\RGB.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target RGB
+
+
+#############################################
+# Link the executable RGB.exe
+
+build RGB.exe: CXX_EXECUTABLE_LINKER__RGB_Debug CMakeFiles/RGB.dir/RGB_Editor.cpp.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\RGB.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = RGB.exe
+  TARGET_IMPLIB = libRGB.dll.a
+  TARGET_PDB = RGB.exe.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target project
+
+
+#############################################
+# Order-only phony target for project
+
+build cmake_object_order_depends_target_project: phony || CMakeFiles/project.dir
+
+build CMakeFiles/project.dir/CS112-2022-2nd_–_S4_-20210083-20210485-20211033-A3-_Part1.cpp.obj: CXX_COMPILER__project_Debug C$:/Users/KHALED/Documents/GitHub/Assignment-3/CS112-2022-2nd$ –$ S4$ -20210083-20210485-20211033-A3-$ Part1.cpp || cmake_object_order_depends_target_project
+  DEP_FILE = CMakeFiles\project.dir\CS112-2022-2nd_–_S4_-20210083-20210485-20211033-A3-_Part1.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles\project.dir
+  OBJECT_FILE_DIR = CMakeFiles\project.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target project
+
+
+#############################################
+# Link the executable project.exe
+
+build project.exe: CXX_EXECUTABLE_LINKER__project_Debug CMakeFiles/project.dir/CS112-2022-2nd_–_S4_-20210083-20210485-20211033-A3-_Part1.cpp.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\project.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = project.exe
+  TARGET_IMPLIB = libproject.dll.a
+  TARGET_PDB = project.exe.dbg
 
 
 #############################################
@@ -86,55 +163,13 @@ build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
 build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 # =============================================================================
-# Object build statements for EXECUTABLE target 6_filters
-
-
-#############################################
-# Order-only phony target for 6_filters
-
-build cmake_object_order_depends_target_6_filters: phony || CMakeFiles/6_filters.dir
-
-build CMakeFiles/6_filters.dir/6-filters.cpp.obj: CXX_COMPILER__6_filters_Debug C$:/Users/KHALED/Documents/GitHub/Assignment-3/6-filters.cpp || cmake_object_order_depends_target_6_filters
-  DEP_FILE = CMakeFiles\6_filters.dir\6-filters.cpp.obj.d
-  FLAGS = -g -std=gnu++14
-  OBJECT_DIR = CMakeFiles\6_filters.dir
-  OBJECT_FILE_DIR = CMakeFiles\6_filters.dir
-
-
-# =============================================================================
-# Link build statements for EXECUTABLE target 6_filters
-
-
-#############################################
-# Link the executable 6_filters.exe
-
-build 6_filters.exe: CXX_EXECUTABLE_LINKER__6_filters_Debug CMakeFiles/6_filters.dir/6-filters.cpp.obj
-  FLAGS = -g
-  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = CMakeFiles\6_filters.dir
-  POST_BUILD = cd .
-  PRE_LINK = cd .
-  TARGET_FILE = 6_filters.exe
-  TARGET_IMPLIB = lib6_filters.dll.a
-  TARGET_PDB = 6_filters.exe.dbg
-
-
-#############################################
-# Utility command for edit_cache
-
-build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\KHALED\Documents\GitHub\Assignment-3\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2021.3.2\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
-  DESC = No interactive CMake dialog available...
-  restat = 1
-
-build edit_cache: phony CMakeFiles/edit_cache.util
-
-# =============================================================================
 # Target aliases.
 
-build 6_filters: phony 6_filters.exe
+build BMP: phony BMP.exe
 
-build The_project: phony The_project.exe
+build RGB: phony RGB.exe
+
+build project: phony project.exe
 
 # =============================================================================
 # Folder targets.
@@ -144,7 +179,7 @@ build The_project: phony The_project.exe
 #############################################
 # Folder: C:/Users/KHALED/Documents/GitHub/Assignment-3/cmake-build-debug
 
-build all: phony The_project.exe 6_filters.exe
+build all: phony BMP.exe RGB.exe project.exe
 
 # =============================================================================
 # Built-in targets
