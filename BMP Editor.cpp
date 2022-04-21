@@ -52,8 +52,8 @@ void shrink_image();
 
 int main() {
     cout << "Ahlan ya user ya habibi \uF04A\n";
+    loadImage();
     while (true) {
-        loadImage();
         cout << "Please select a filter to apply or 0 to exit:\n"
                 "1- Black & White Filter\n"
                 "2- Invert Filter\n"
