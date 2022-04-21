@@ -5,8 +5,6 @@
 // Author2 and ID and Group: Khaled Salah Abbas & 20211033 & A
 // Author3 and ID and Group: Youssef Mohammed Morad & 20210485 & A
 // Teaching Assistant: Eng. Nesma Mohamed & Eng. Yousra Ayman
-// Purpose:
-
 
 #include <iostream>
 #include <regex>
@@ -14,7 +12,7 @@
 #include "bmplib.cpp"
 
 
-#define RED     "\033[31m"      /* Red */
+
 
 
 using namespace std;
@@ -36,8 +34,6 @@ void flip();
 
 void detect_edges();
 
-void save_new_Image();
-
 void darkandLight();
 
 void darken();
@@ -57,7 +53,6 @@ void enlarge_image();
 void shrink_image();
 
 int main() {
-    cout << RED;
     cout << "Ahlan ya user ya habibi \uF04A\n";
     while (true) {
         loadImage();
@@ -86,6 +81,8 @@ int main() {
             filter_b();
         else if (tolower(option) == 'c')
             filter_c();
+        else if (tolower(option) == 's')
+            saveImage();
         else if (option == '1')
             BW();
         else if (option == '2')
@@ -142,19 +139,6 @@ void loadImage() {
 }
 
 //_________________________________________
-void save_new_Image() {
-    char imageFileName[100];
-
-    // Get gray scale image target file name
-    cout << RED << "Enter the target image file name: ";
-    cin >> imageFileName;
-
-    // Add to it .bmp extension and load image
-    strcat(imageFileName, ".bmp");
-    writeGSBMP(imageFileName, new_image);
-}
-
-//_________________________________________
 void saveImage() {
     char imageFileName[100];
 
@@ -183,7 +167,11 @@ void darkandLight() {
     } else {
         darken();
     }
-    save_new_Image();
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            image[i][j] = new_image[i][j];
+        }
+    }
 }
 
 //_________________________________________
@@ -214,7 +202,6 @@ void BW() {
                 j = 0;
         }
     }
-    saveImage();
 }
 
 //_________________________________________
@@ -225,7 +212,11 @@ void merge() {
             new_image[i][j] = (image[i][j] + image2[i][j]) / 2;
         }
     }
-    save_new_Image();
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            image[i][j] = new_image[i][j];
+        }
+    }
 }
 
 //_________________________________________
@@ -252,7 +243,11 @@ void rotate() {
             }
         }
     }
-    save_new_Image();
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            image[i][j] = new_image[i][j];
+        }
+    }
 }
 
 //_________________________________________
@@ -262,7 +257,6 @@ void invert() {
             j = 255 - j;
         }
     }
-    saveImage();
 }
 
 //_________________________________________
@@ -285,7 +279,11 @@ void flip() {
             }
         }
     }
-    save_new_Image();
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            image[i][j] = new_image[i][j];
+        }
+    }
 }
 
 //_________________________________________
@@ -396,9 +394,11 @@ void filter_b() {
             }
         }
     }
-
-
-    save_new_Image();
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            image[i][j] = new_image[i][j];
+        }
+    }
 }
 
 //_________________________________________
@@ -441,7 +441,11 @@ void filter_c() {
 
         }
     }
-    save_new_Image();
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            image[i][j] = new_image[i][j];
+        }
+    }
 }
 
 //_________________________________________
@@ -478,7 +482,6 @@ void filter_a() {
             }
         }
     }
-    saveImage();
 }
 
 //_________________________________________
@@ -515,7 +518,11 @@ void enlarge_image() {
             }
         }
     }
-    save_new_Image();
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            image[i][j] = new_image[i][j];
+        }
+    }
 }
 
 //_________________________________________
@@ -580,7 +587,11 @@ void shrink_image() {
             st += nCombinedPixels;
         }
     }
-    save_new_Image();
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            image[i][j] = new_image[i][j];
+        }
+    }
 }
 
 //_________________________________________
@@ -607,5 +618,9 @@ void detect_edges() {
             j = 255 - j;
         }
     }
-    save_new_Image();
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            image[i][j] = new_image[i][j];
+        }
+    }
 }
