@@ -56,6 +56,7 @@ bool saved = false;
 //_________________________________________
 
 int main() {
+    
     cout << "Ahlan ya user ya habibi \uF04A\n";
     loadImage();
     while (true) {
@@ -75,41 +76,52 @@ int main() {
                 "s- Save the image to a file\n"
                 "0- Exit\n"
                 ">>";
-        char option;
+        
+        string option;
         cin >> option;
 
-        if (tolower(option) == 'a')
+        regex validOption("[0-9sSa-cA-C]");
+        while(!regex_match(option, validOption)){
+            cout << "Please enter an option from the previous list\n>>";
+            cin >> option;
+        }
+
+
+        if (tolower(option[0]) == 'a')
             filter_a();
-        else if (tolower(option) == 'b')
+        else if (tolower(option[0]) == 'b')
             filter_b();
-        else if (tolower(option) == 'c')
+        else if (tolower(option[0]) == 'c')
             filter_c();
-        else if (option == '1')
+        else if (option == "1")
             BW();
-        else if (option == '2')
+        else if (option == "2")
             invert();
-        else if (option == '3')
+        else if (option == "3")
             merge();
-        else if (option == '4')
+        else if (option == "4")
             flip();
-        else if (option == '5')
+        else if (option == "5")
             darkandLight();
-        else if (option == '6')
+        else if (option == "6")
             rotate();
-        else if (option == '7')
+        else if (option == "7")
             detect_edges();
-        else if (option == '8')
+        else if (option == "8")
             enlarge_image();
-        else if (option == '9')
+        else if (option == "9")
             shrink_image();
-        else if (option == '0')
+        else if (option == "0"){
             if(exit_or_save())
                 return 0;
-        else if (tolower(option) == 's') 
+        }
+        else if (tolower(option[0]) == 's') {
             saveImage();
+            saved = true;
+        }
         cout << "\n_______________________________________________________________\n";
     }
-
+     
 }
 
 
