@@ -18,6 +18,8 @@ unsigned char new_image[SIZE][SIZE][RGB];
 
 void loadImage();
 
+void loadImage2();
+
 void saveImage();
 
 void BW();
@@ -31,6 +33,8 @@ void flip();
 void detect_edges();
 
 void darkandLight();
+void lighten();
+void darken();
 
 void rotate();
 
@@ -189,7 +193,16 @@ void invert() {
 }
 
 //_________________________________________
-void merge() {}
+void merge() {
+    loadImage2();
+    for(int i = 0; i < SIZE; i++){
+        for(int j = 0; j < SIZE; j++){
+            for(int k = 0; k < 3; k++) {
+                image[i][j][k] = (image[i][j][k] + image2[i][j][k]) / 2;
+            }
+        }
+    }
+}
 
 //_________________________________________
 void flip() {
@@ -253,7 +266,44 @@ void detect_edges() {
 }
 
 //_________________________________________
-void darkandLight() {}
+void darkandLight() {
+    string choice;
+    cout << "Enter 1 if you want to lighten your image\nEnter 2 if you want to darken your image\n";
+    cin >> choice;
+
+    while(choice != "1" && choice != "2"){
+        cout << "Please enter a valid choice\n";
+        cin >> choice;
+    }
+
+    if(choice == "1"){
+        lighten();
+    }
+    else{
+        darken();
+    }
+}
+//_________________________________________
+void lighten(){
+    for(int i = 0; i < SIZE; i++){
+        for(int j = 0; j < SIZE; j++){
+            for(int k = 0; k < 3; k++) {
+                image[i][j][k] = (image[i][j][k] + 255) / 2;
+            }
+        }
+    }
+}
+//_________________________________________
+void darken(){
+    for(int i = 0; i < SIZE; i++){
+        for(int j = 0; j < SIZE; j++){
+            for(int k = 0; k < 3; k++) {
+                image[i][j][k] = image[i][j][k]/2;
+            }
+        }
+    }
+}
+
 
 //_________________________________________
 void rotate() {
@@ -294,7 +344,82 @@ void rotate() {
 }
 
 //_________________________________________
-void shrink_image() {}
+void shrink_image() {
+    cout << "How much do you want to shrink your image?\n"
+            "The program will shrink it for 1/(a) of the image original dimensions\n"
+            "Enter a:";
+
+    string choice;
+    int nCombinedPixels;
+    cin >> choice;
+
+    regex validChoice("0*[1-9][0-9]*");
+    while(!regex_match(choice, validChoice)){
+        cout << "Please enter a valid choice:\n";
+        cin >> choice;
+    }
+
+    nCombinedPixels = stoi(choice);
+
+    // shrinking horizontally (a row will have fewer columns)
+    for(auto & i : image){ // loop over all rows of new image
+
+        //the start of the columns (in the same row) to take their average
+        int st = 0;
+
+        for(int j = 0; j < SIZE/nCombinedPixels; j++){ // loop over the needed columns to fill
+
+            for(int m = 0; m < 3; m++){
+                // the average color in the new pixel
+                int ave = 0;
+                for(int k = st; k < st + nCombinedPixels; k++){
+                    ave += i[k][m];
+                }
+
+                // save the new color in the original image (as we're not done of shrinking yet)
+                i[j][m] = ave/(nCombinedPixels);
+
+            }
+
+            // the new start of the next 2 columns to get their average
+            st+=nCombinedPixels;
+
+        }
+    }
+
+    // shrinking vertically after the horizontally (a column will have fewer rows)
+    for(int i = 0; i < SIZE/nCombinedPixels; i++){ // loop over needed columns of new image to fill
+
+        // the start of the rows (in the same column) to take their average
+        int st = 0;
+
+        for(int j = 0; j < SIZE/nCombinedPixels; j++){
+
+            for(int m = 0; m < 3; m++) {
+                // the average color in the new pixel
+                int ave = 0;
+                for (int k = st; k < st + nCombinedPixels; k++) {
+                    ave += image[k][i][m];
+                }
+
+                // save the new color in the new image (shrinking is done for this pixel)
+                new_image[j][i][m] = ave / (nCombinedPixels);
+
+            }
+
+            // the new start of the next 2 rows to get their average
+            st+=nCombinedPixels;
+        }
+    }
+    
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            for (int k = 0; k < 3; ++k)
+                image[i][j][k] = new_image[i][j][k];
+        }
+    }
+    
+}
 
 //_________________________________________
 void enlarge_image() {
@@ -520,5 +645,50 @@ void filter_b() {
 }
 
 //_________________________________________
-void filter_c() {}
+void filter_c() {
+    string radius_;
+    cout << "Please enter the radius you want to blur your image with:\n";
+
+    // taking radius input from user
+    cin >> radius_;
+    regex validChoice("0*[1-9][0-9]*");
+    while(!regex_match(radius_, validChoice)){
+        cout << "Please enter a valid radius:\n";
+        cin >> radius_;
+    }
+
+    int radius = stoi(radius_);
+
+    for(int i = radius; i < SIZE-radius; i++){ // loop for every possible row that has the needed radius around (without going out of boundaries)
+        for(int j = radius; j < SIZE-radius; j++){ // loop for every possible column that has the needed radius around (without going out of boundaries)
+
+            for(int m = 0; m < 3; m++){
+                // ave variable to calculate the color of the blurred pixel by getting the average color of a group of pixels
+                int ave = 0;
+
+                // adding the color of these group of pixels then diving by the number of them
+                for(int k = i - radius; k <= i+radius; k++){
+                    for(int l = j - radius; l <= j+radius; l++){
+                        ave += image[k][l][m];
+                    }
+                }
+                ave /= (2 * radius + 1) * (2 * radius + 1);
+
+                // filling the correspondent pixels with the blurred average in the new image
+                for(int k = i - radius; k <= i+radius; k++){
+                    for(int l = j - radius; l <= j+radius; l++){
+                        new_image[k][l][m] = ave;
+                    }
+                }
+            }
+        }
+    }
+    
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            for (int k = 0; k < 3; ++k)
+                image[i][j][k] = new_image[i][j][k];
+        }
+    }
+}
 //_________________________________________
