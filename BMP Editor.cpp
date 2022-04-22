@@ -564,44 +564,47 @@ void filter_a() {
 }
 
 //_________________________________________
-void enlarge_image() {
-    int Quarter;
-    cout << "Enter the quarter you want to enlarge :";
-    cin >> Quarter;
-    while (Quarter > 5 or Quarter < 0) {
-        cout << "Enter a valid number :";
-        cin >> Quarter;
-    }
-    if (Quarter == 1) {
-        for (int i = 0; i < 256; i++) {
-            for (int j = 0; j < 256; j++) {
-                new_image[i][j] = image[i / 2][j / 2];
-            }
-        }
-    } else if (Quarter == 2) {
-        for (int i = 0; i < 256; i++) {
-            for (int j = 0; j < 256; j++) {
-                new_image[i][256 - j] = image[i][256 - j / 2];
-            }
-        }
-    } else if (Quarter == 3) {
-        for (int i = 0; i < 256; i++) {
-            for (int j = 0; j < 256; j++) {
-                new_image[256 - i][j] = image[256 - i / 2][j / 2];
-            }
-        }
-    } else if (Quarter == 4) {
-        for (int i = 0; i < 256; i++) {
-            for (int j = 0; j < 256; j++) {
-                new_image[256 - i][256 - j] = image[256 - i / 2][256 - j / 2];
-            }
-        }
-    }
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
-            image[i][j] = new_image[i][j];
-        }
-    }
+  void enlarge_image() {
+      string Quarter;
+      cout << "Enter the quarter you want to enlarge :"<<endl;
+      cin >> Quarter;
+      while (true) {
+          bool is_valid = true;
+          if(Quarter != "1" and Quarter != "2" and Quarter != "3" and Quarter != "4"){
+              is_valid = false;
+          }
+          if(is_valid){
+              break;
+          }
+          cout << "Enter a valid number :"<<endl;
+          cin >> Quarter;
+      }
+      if (Quarter == "1") {
+          for (int i = 0; i < 256; i++) {
+              for (int j = 0; j < 256; j++) {
+                  new_image[i][j] = image[i / 2][j / 2];
+              }
+          }
+      } else if (Quarter == "2") {
+          for (int i = 0; i < 256; i++) {
+              for (int j = 0; j < 256; j++) {
+                  new_image[i][256 - j] = image[i][256 - j / 2];
+              }
+          }
+      } else if (Quarter == "3") {
+          for (int i = 0; i < 256; i++) {
+              for (int j = 0; j < 256; j++) {
+                  new_image[256 - i][j] = image[256 - i / 2][j / 2];
+              }
+          }
+      } else if (Quarter == "4") {
+          for (int i = 0; i < 256; i++) {
+              for (int j = 0; j < 256; j++) {
+                  new_image[256 - i][256 - j] = image[256 - i / 2][256 - j / 2];
+              }
+          }
+      }
+
     saved = false;
 }
 
