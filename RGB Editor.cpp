@@ -9,6 +9,7 @@
 #include <iostream>
 #include <cstring>
 #include "bmplib.cpp"
+#include <regex>
 
 
 using namespace std;
