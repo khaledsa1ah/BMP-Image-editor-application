@@ -748,7 +748,7 @@ void filter_b() {
                 image[i][j][k] = new_image[i][j][k];
         }
     }
-}
+
     saved = false;
 
 }
