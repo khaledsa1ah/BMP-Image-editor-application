@@ -102,14 +102,11 @@ int main() {
             enlarge_image();
         else if (option == '9')
             shrink_image();
-        else if (option == '0'){
+        else if (option == '0')
             if(exit_or_save())
                 return 0;
-        }
-        else if (tolower(option) == 's') {
+        else if (tolower(option) == 's') 
             saveImage();
-            saved = true;
-        }
         cout << "\n_______________________________________________________________\n";
     }
 
@@ -163,6 +160,8 @@ void saveImage() {
     // Add to it .bmp extension and load image
     strcat(imageFileName, ".bmp");
     writeRGBBMP(imageFileName, image);
+    
+    saved = true;
 }
 
 //_________________________________________
@@ -170,16 +169,21 @@ void saveImage() {
 bool exit_or_save(){
 
     if(!saved){
-        cout << "Are you sure you want to exit without saving?\nPress 0 to exit\nPress 1 to return back\n>>";
+        cout << "Are you sure you want to exit without saving?\nPress 0 to exit\nPress 1 to save and exit\nPress 2 to return back>>";
         char choice;
         cin >> choice;
-        while(choice != '0' && choice != '1'){
+        while(choice != '0' && choice != '1' && choice != '2'){
             cout << "Please enter a valid choice\n>>";
             cin >> choice;
         }
-        if(choice == '1')
+        if(choice == '2')
             return false;
+        else if(choice == '1'){
+            saveImage();
+            return true;
+        }
     }
+    
     return true;
 
 }
