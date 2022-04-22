@@ -385,43 +385,53 @@ void darken(){
 }
 
 //_________________________________________
-
 void rotate() {
-    int degree;
-    cout << "Enter the degree you want the image be rotated by :";
-    cin >> degree;
-    if (degree == 270) {
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                for (int k = 0; k < 3; k++) {
-                    new_image[255 - j][i][k] = image[i][j][k];
-                }
-            }
-        }
-    } else if (degree == 180) {
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                for (int k = 0; k < 3; k++) {
-                    new_image[255 - i][255 - j][k] = image[i][j][k];
-                }
-            }
-        }
-    } else if (degree == 90) {
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                for (int k = 0; k < 3; k++) {
-                    new_image[j][255 - i][k] = image[i][j][k];
-                }
-            }
-        }
-    }
-    for (int i = 0; i < SIZE; i++) {
+      string degree;
+      cout << "Enter the degree you want the image be rotated by :"<<endl;
+      cin >> degree;
+      while(true){
+          bool is_valid = true;
+          if(degree != "90" and degree != "270" and degree != "180") {
+              is_valid = false;
+          }
+          if(is_valid){
+                  break;
+
+          }
+          cout << "Please enter a valid degree :"<<endl;
+          cin >> degree;
+      }
+         if (degree == "270") {
+             for (int i = 0; i < SIZE; i++) {
+                 for (int j = 0; j < SIZE; j++) {
+                     for(int k=0;k<3;k++) {
+                         new_image[255 - j][i][k]= image[i][j][k];
+                     }
+                 }
+             }
+         } else if (degree == "180") {
+             for (int i = 0; i < SIZE; i++) {
+                 for (int j = 0; j < SIZE; j++) {
+                     for(int k=0;k<3;k++) {
+                         new_image[255 - i][255 - j][k] = image[i][j][k];
+                     }
+                 }
+             }
+         } else if (degree == "90") {
+             for (int i = 0; i < SIZE; i++) {
+                 for (int j = 0; j < SIZE; j++) {
+                     for(int k=0;k<3;k++) {
+                         new_image[j][255 - i][k]= image[i][j][k];
+                     }
+                 }
+             }
+         }
+     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
             for (int k = 0; k < 3; ++k)
                 image[i][j][k] = new_image[i][j][k];
         }
     }
-
     saved = false;
 
 }
