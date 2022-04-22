@@ -413,7 +413,7 @@ void rotate() {
 //_________________________________________
 
 void shrink_image() {
-
+    
     cout << "How much do you want to shrink your image?\n"
             "The program will shrink it for 1/(a) of the image original dimensions\n"
             "Enter a:";
@@ -430,55 +430,41 @@ void shrink_image() {
 
     nCombinedPixels = stoi(choice);
 
-    // shrinking horizontally (a row will have fewer columns)
-    for(int i = 0; i < SIZE; i++){ // loop over all rows of new image
+    //the start of the columns (in the same row) to take their average
+    int st_row = 0;
 
-        //the start of the columns (in the same row) to take their average
-        int st = 0;
+    for(int i = 0; i < SIZE/nCombinedPixels; i++){ // loop over all rows of new image
+
+        //the start of the rows (in the same col) to take their average
+        int st_col = 0;
 
         for(int j = 0; j < SIZE/nCombinedPixels; j++){ // loop over the needed columns to fill
 
             for(int m = 0; m < 3; m++){
                 // the average color in the new pixel
                 int ave = 0;
-                for(int k = st; k < st + nCombinedPixels; k++){
-                    ave += image[i][k][m];
+
+                // getting the average of all the pixels that completes a square of nCombined*nCombined
+                for(int k = st_row; k < st_row + nCombinedPixels; k++) {
+                    for (int l = st_col; l < st_col + nCombinedPixels; l++) {
+                        ave += image[k][l][m];
+                    }
                 }
 
-                // save the new color in the original image (as we're not done of shrinking yet)
-                image[i][j][m] = ave/(nCombinedPixels);
+
+                // save the new color in the new image
+                new_image[i][j][m] = ave/(nCombinedPixels*nCombinedPixels);
 
             }
 
-            // the new start of the next 2 columns to get their average
-            st+=nCombinedPixels;
+            // the new start of the next 2 columns to get their average and put it in the next col(j) in same row(i)
+            st_col += nCombinedPixels;
 
         }
-    }
 
-    // shrinking vertically after the horizontally (a column will have fewer rows)
-    for(int i = 0; i < SIZE/nCombinedPixels; i++){ // loop over needed columns of new image to fill
+        // the new start of the next 2 rows to get their average and put it in the next row(i) in same row(j)
+        st_row += nCombinedPixels;
 
-        // the start of the rows (in the same column) to take their average
-        int st = 0;
-
-        for(int j = 0; j < SIZE/nCombinedPixels; j++){
-
-            for(int m = 0; m < 3; m++) {
-                // the average color in the new pixel
-                int ave = 0;
-                for (int k = st; k < st + nCombinedPixels; k++) {
-                    ave += image[k][i][m];
-                }
-
-                // save the new color in the new image (shrinking is done for this pixel)
-                new_image[j][i][m] = ave / (nCombinedPixels);
-
-            }
-
-            // the new start of the next 2 rows to get their average
-            st+=nCombinedPixels;
-        }
     }
 
     for (int i = 0; i < SIZE; i++) {
