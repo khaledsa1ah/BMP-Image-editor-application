@@ -348,121 +348,131 @@ void flip() {
 }
 
 //_________________________________________
-void filter_b() {
-    string order;
-    unsigned char Quarter_1[SIZE][SIZE];
-    unsigned char Quarter_2[SIZE][SIZE];
-    unsigned char Quarter_3[SIZE][SIZE];
-    unsigned char Quarter_4[SIZE][SIZE];
-    cout << "Enter the order of quarters you want the image to be ordered by :" << endl;
-    getline(cin >> ws, order, '\n');
-    for (int i = 0; i < order.length(); i++) {
-        if (order[i] == ' ') {
-            order.erase(i, 1);
-        }
-    }
-    for (int i = 0; i < 4; i++) {
-        while (order[i] != '1' and order[i] != '2' and order[i] != '3' and order[i] != '4') {
-            cout << "Please enter a valid order :" << endl;
-            getline(cin >> ws, order, '\n');
-            for (int i = 0; i < order.length(); i++) {
-                if (order[i] == ' ') {
-                    order.erase(i, 1);
-                }
-            }
-        }
-    }
-    for (int i = 0; i < 128; i++) {
-        for (int j = 0; j < 128; j++) {
-            Quarter_1[i][j] = image[i][j];
-        }
-    }
-    for (int i = 0; i < 128; i++) {
-        for (int j = 128; j < 256; j++) {
-            Quarter_2[i][j] = image[i][j];
-        }
-    }
-    for (int i = 128; i < 256; i++) {
-        for (int j = 0; j < 128; j++) {
-            Quarter_3[i][j] = image[i][j];
+  void filter_b() {
+      string order;
+      unsigned char Quarter_1[SIZE][SIZE];
+      unsigned char Quarter_2[SIZE][SIZE];
+      unsigned char Quarter_3[SIZE][SIZE];
+      unsigned char Quarter_4[SIZE][SIZE];
+      cout << "Enter the order of quarters you want the image to be ordered by :" << endl;
+      getline(cin >> ws, order, '\n');
+      for (int i = 0; i < order.length(); i++) {
+          if (order[i] == ' ') {
+              order.erase(i, 1);
+              i--;
+          }
+      }
+      while(true) {
+          bool is_valid = true;
+          if (order.length() == 4) {
+              for (int i = 0; i < 4; i++) {
+                  if (order[i] < '1' || order[i] > '4') {
+                      is_valid = false;
+                  }
+              }
+              if (is_valid) {
+                  break;
+              }
+          }
+          cout << "Please enter a valid order :";
+          getline(cin >> ws, order, '\n');
+          for (int i = 0; i < order.length(); i++) {
+              if (order[i] == ' ') {
+                  order.erase(i, 1);
+                  i--;
+              }
+          }
+      }
+      for (int i = 0; i < 128; i++) {
+          for (int j = 0; j < 128; j++) {
+              Quarter_1[i][j] = image[i][j];
+          }
+      }
+      for (int i = 0; i < 128; i++) {
+          for (int j = 128; j < 256; j++) {
+              Quarter_2[i][j] = image[i][j];
+          }
+      }
+      for (int i = 128; i < 256; i++) {
+          for (int j = 0; j < 128; j++) {
+              Quarter_3[i][j] = image[i][j];
 
-        }
-    }
-    for (int i = 128; i < 256; i++) {
-        for (int j = 128; j < 256; j++) {
-            Quarter_4[i][j] = image[i][j];
-        }
-    }
-    for (int k = 0; k < 4; k++) {
-        if (k == 0) {
-            for (int i = 0; i < 128; i++) {
-                for (int j = 0; j < 128; j++) {
-                    if (order[0] == '1') {
-                        new_image[i][j] = Quarter_1[i][j];
-                    } else if (order[0] == '2') {
-                        new_image[i][j] = Quarter_2[i][128 + j];
-                    } else if (order[0] == '3') {
-                        new_image[i][j] = Quarter_3[128 + i][j];
-                    } else if (order[0] == '4') {
-                        new_image[i][j] = Quarter_4[128 + i][128 + j];
-                    }
-                }
-            }
+          }
+      }
+      for (int i = 128; i < 256; i++) {
+          for (int j = 128; j < 256; j++) {
+              Quarter_4[i][j] = image[i][j];
+          }
+      }
+      for (int k = 0; k < 4; k++) {
+          if (k == 0) {
+              for (int i = 0; i < 128; i++) {
+                  for (int j = 0; j < 128; j++) {
+                      if (order[0] == '1') {
+                          new_image[i][j] = Quarter_1[i][j];
+                      } else if (order[0] == '2') {
+                          new_image[i][j] = Quarter_2[i][128 + j];
+                      } else if (order[0] == '3') {
+                          new_image[i][j] = Quarter_3[128 + i][j];
+                      } else if (order[0] == '4') {
+                          new_image[i][j] = Quarter_4[128 + i][128 + j];
+                      }
+                  }
+              }
 
-        } else if (k == 1) {
-            for (int i = 0; i < 128; i++) {
-                for (int j = 128; j < 256; j++) {
-                    if (order[1] == '1') {
-                        new_image[i][j] = Quarter_1[i][j - 128];
-                    } else if (order[1] == '2') {
-                        new_image[i][j] = Quarter_2[i][j];
-                    } else if (order[1] == '3') {
-                        new_image[i][j] = Quarter_3[128 + i][j - 128];
-                    } else if (order[1] == '4') {
-                        new_image[i][j] = Quarter_4[128 + i][j];
-                    }
-                }
-            }
+          } else if (k == 1) {
+              for (int i = 0; i < 128; i++) {
+                  for (int j = 128; j < 256; j++) {
+                      if (order[1] == '1') {
+                          new_image[i][j] = Quarter_1[i][j - 128];
+                      } else if (order[1] == '2') {
+                          new_image[i][j] = Quarter_2[i][j];
+                      } else if (order[1] == '3') {
+                          new_image[i][j] = Quarter_3[128 + i][j - 128];
+                      } else if (order[1] == '4') {
+                          new_image[i][j] = Quarter_4[128 + i][j];
+                      }
+                  }
+              }
 
 
-        } else if (k == 2) {
-            for (int i = 128; i < 256; i++) {
-                for (int j = 0; j < 128; j++) {
-                    if (order[2] == '1') {
-                        new_image[i][j] = Quarter_1[i - 128][j];
-                    } else if (order[2] == '2') {
-                        new_image[i][j] = Quarter_2[i - 128][128 + j];
-                    } else if (order[2] == '3') {
-                        new_image[i][j] = Quarter_3[i][j];
-                    } else if (order[2] == '4') {
-                        new_image[i][j] = Quarter_4[i][128 + j];
-                    }
-                }
-            }
-        } else if (k == 3) {
-            for (int i = 128; i < 256; i++) {
-                for (int j = 128; j < 256; j++) {
-                    if (order[3] == '1') {
-                        new_image[i][j] = Quarter_1[i - 128][j - 128];
-                    } else if (order[3] == '2') {
-                        new_image[i][j] = Quarter_2[i - 128][j];
-                    } else if (order[3] == '3') {
-                        new_image[i][j] = Quarter_3[i][j - 128];
-                    } else if (order[3] == '4') {
-                        new_image[i][j] = Quarter_4[i][j];
-                    }
-                }
-            }
-        }
-    }
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
-            image[i][j] = new_image[i][j];
-        }
-    }
-    saved = false;
-}
-
+          } else if (k == 2) {
+              for (int i = 128; i < 256; i++) {
+                  for (int j = 0; j < 128; j++) {
+                      if (order[2] == '1') {
+                          new_image[i][j] = Quarter_1[i - 128][j];
+                      } else if (order[2] == '2') {
+                          new_image[i][j] = Quarter_2[i - 128][128 + j];
+                      } else if (order[2] == '3') {
+                          new_image[i][j] = Quarter_3[i][j];
+                      } else if (order[2] == '4') {
+                          new_image[i][j] = Quarter_4[i][128 + j];
+                      }
+                  }
+              }
+          } else if (k == 3) {
+              for (int i = 128; i < 256; i++) {
+                  for (int j = 128; j < 256; j++) {
+                      if (order[3] == '1') {
+                          new_image[i][j] = Quarter_1[i - 128][j - 128];
+                      } else if (order[3] == '2') {
+                          new_image[i][j] = Quarter_2[i - 128][j];
+                      } else if (order[3] == '3') {
+                          new_image[i][j] = Quarter_3[i][j - 128];
+                      } else if (order[3] == '4') {
+                          new_image[i][j] = Quarter_4[i][j];
+                      }
+                  }
+              }
+          }
+      }
+      for (int i = 0; i < SIZE; i++) {
+          for (int j = 0; j < SIZE; j++) {
+              image[i][j] = new_image[i][j];
+          }
+      }
+      saved = false;
+  }
 //_________________________________________
 void filter_c() {
     string radius_;
