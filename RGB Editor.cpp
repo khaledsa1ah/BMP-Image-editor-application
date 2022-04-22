@@ -606,7 +606,6 @@ void filter_a() {
 //_________________________________________
 
 void filter_b() {
-
     string order;
     unsigned char Quarter_1[SIZE][SIZE][RGB];
     unsigned char Quarter_2[SIZE][SIZE][RGB];
@@ -617,19 +616,32 @@ void filter_b() {
     for (int i = 0; i < order.length(); i++) {
         if (order[i] == ' ') {
             order.erase(i, 1);
+            i--;
         }
     }
-    for (int i = 0; i < 4; i++) {
-        while (order[i] != '1' and order[i] != '2' and order[i] != '3' and order[i] != '4') {
-            cout << "Please enter a valid order :" << endl;
-            getline(cin >> ws, order, '\n');
-            for (int i = 0; i < order.length(); i++) {
-                if (order[i] == ' ') {
-                    order.erase(i, 1);
+    while(true) {
+        bool is_valid = true;
+        if (order.length() == 4) {
+            for (int i = 0; i < 4; i++) {
+                if (order[i] < '1' || order[i] > '4') {
+                    is_valid = false;
                 }
+            }
+            if (is_valid) {
+                break;
+            }
+        }
+        cout << "Please enter a valid order :";
+        getline(cin >> ws, order, '\n');
+        for (int i = 0; i < order.length(); i++) {
+            if (order[i] == ' ') {
+                order.erase(i, 1);
+                i--;
             }
         }
     }
+
+
     for (int i = 0; i < 128; i++) {
         for (int j = 0; j < 128; j++) {
             for (int k = 0; k < 3; k++) {
@@ -736,7 +748,7 @@ void filter_b() {
                 image[i][j][k] = new_image[i][j][k];
         }
     }
-
+}
     saved = false;
 
 }
