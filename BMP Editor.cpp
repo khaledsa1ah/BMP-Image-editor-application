@@ -462,7 +462,8 @@ void filter_a() {
                 image[i][j] = image[255 - i][j];
             }
         }
-    } else if (choice == 'u') {
+    }
+    else if (choice == 'u') {
 
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
