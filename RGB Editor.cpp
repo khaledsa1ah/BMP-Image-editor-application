@@ -19,9 +19,11 @@ unsigned char new_image[SIZE][SIZE][RGB];
 
 void loadImage();
 
-void loadImage2();
+void load_2_images();
 
 void saveImage();
+
+bool exit_or_save();
 
 void BW();
 
@@ -48,6 +50,10 @@ void filter_a();
 void enlarge_image();
 
 void shrink_image();
+
+bool saved = false;
+
+//_________________________________________
 
 int main() {
     cout << "Ahlan ya user ya habibi \uF04A\n";
@@ -96,16 +102,24 @@ int main() {
             enlarge_image();
         else if (option == '9')
             shrink_image();
-        else if (option == '0')
-            return 0;
-        else if (tolower(option) == 's')
+        else if (option == '0'){
+            if(exit_or_save())
+                return 0;
+        }
+        else if (tolower(option) == 's') {
             saveImage();
+            saved = true;
+        }
         cout << "\n_______________________________________________________________\n";
     }
 
 }
 
+
+//_________________________________________
+
 void loadImage() {
+
     char imageFileName[100];
 
 
@@ -122,6 +136,7 @@ void loadImage() {
 //_________________________________________
 
 void load_2_images() {
+
     char second_imageFileName[100];
 
 
@@ -138,6 +153,7 @@ void load_2_images() {
 //_________________________________________
 
 void saveImage() {
+
     char imageFileName[100];
 
     // Get gray scale image target file name
@@ -150,7 +166,28 @@ void saveImage() {
 }
 
 //_________________________________________
+
+bool exit_or_save(){
+
+    if(!saved){
+        cout << "Are you sure you want to exit without saving?\nPress 0 to exit\nPress 1 to return back\n>>";
+        char choice;
+        cin >> choice;
+        while(choice != '0' && choice != '1'){
+            cout << "Please enter a valid choice\n>>";
+            cin >> choice;
+        }
+        if(choice == '1')
+            return false;
+    }
+    return true;
+
+}
+
+//_________________________________________
+
 void BW() {
+
     double grey;
     for (auto &i: image) {
         for (auto &j: i) {
@@ -180,10 +217,14 @@ void BW() {
         }
     }
 
+    saved = false;
+
 }
 
 //_________________________________________
+
 void invert() {
+
     for (int i = 0; i < 256; i++) {
         for (int j = 0; j < 256; j++) {
             for (int k = 0; k < 3; k++) {
@@ -191,11 +232,16 @@ void invert() {
             }
         }
     }
+
+    saved = false;
+
 }
 
 //_________________________________________
+
 void merge() {
-    loadImage2();
+
+    load_2_images();
     for(int i = 0; i < SIZE; i++){
         for(int j = 0; j < SIZE; j++){
             for(int k = 0; k < 3; k++) {
@@ -203,10 +249,15 @@ void merge() {
             }
         }
     }
+
+    saved = false;
+
 }
 
 //_________________________________________
+
 void flip() {
+
     cout << "Flip (h)orizontally or (v)ertically ?"
             "\n>>";
     char choice;
@@ -236,10 +287,15 @@ void flip() {
                 image[i][j][k] = new_image[i][j][k];
         }
     }
+
+    saved = false;
+
 }
 
 //_________________________________________
+
 void detect_edges() {
+
     BW();
     for (int i = 1; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
@@ -264,9 +320,13 @@ void detect_edges() {
             }
         }
     }
+
+    saved = false;
+
 }
 
 //_________________________________________
+
 void darkandLight() {
     string choice;
     cout << "Enter 1 if you want to lighten your image\nEnter 2 if you want to darken your image\n";
@@ -283,6 +343,9 @@ void darkandLight() {
     else{
         darken();
     }
+
+    saved = false;
+
 }
 //_________________________________________
 void lighten(){
@@ -305,8 +368,8 @@ void darken(){
     }
 }
 
-
 //_________________________________________
+
 void rotate() {
     int degree;
     cout << "Enter the degree you want the image be rotated by :";
@@ -342,10 +405,15 @@ void rotate() {
                 image[i][j][k] = new_image[i][j][k];
         }
     }
+
+    saved = false;
+
 }
 
 //_________________________________________
+
 void shrink_image() {
+
     cout << "How much do you want to shrink your image?\n"
             "The program will shrink it for 1/(a) of the image original dimensions\n"
             "Enter a:";
@@ -412,18 +480,22 @@ void shrink_image() {
             st+=nCombinedPixels;
         }
     }
-    
+
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
             for (int k = 0; k < 3; ++k)
                 image[i][j][k] = new_image[i][j][k];
         }
     }
-    
+
+    saved = false;
+
 }
 
 //_________________________________________
+
 void enlarge_image() {
+
     int Quarter;
     cout << "Enter the quarter you want to enlarge :";
     cin >> Quarter;
@@ -470,9 +542,13 @@ void enlarge_image() {
                 image[i][j][k] = new_image[i][j][k];
         }
     }
+
+    saved = false;
+
 }
 
 //_________________________________________
+
 void filter_a() {
     cout << "Mirror (l)eft, (r)ight, (u)pper, (d)own side?"
             "\n>>";
@@ -510,10 +586,15 @@ void filter_a() {
             }
         }
     }
+
+    saved = false;
+
 }
 
 //_________________________________________
+
 void filter_b() {
+
     string order;
     unsigned char Quarter_1[SIZE][SIZE][RGB];
     unsigned char Quarter_2[SIZE][SIZE][RGB];
@@ -643,10 +724,15 @@ void filter_b() {
                 image[i][j][k] = new_image[i][j][k];
         }
     }
+
+    saved = false;
+
 }
 
 //_________________________________________
+
 void filter_c() {
+
     string radius_;
     cout << "Please enter the radius you want to blur your image with:\n";
 
@@ -684,12 +770,16 @@ void filter_c() {
             }
         }
     }
-    
+
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
             for (int k = 0; k < 3; ++k)
                 image[i][j][k] = new_image[i][j][k];
         }
     }
+
+    saved = false;
+
 }
+
 //_________________________________________
