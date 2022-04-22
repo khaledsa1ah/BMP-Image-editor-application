@@ -48,7 +48,7 @@ void write_hdr(uint8 *hdr, int *hdr_idx, uint32 data, uint32 size);
 uint8 tempImage[SIZE][SIZE][RGB];
 uint8 tempGSImage[SIZE][SIZE];
 
-int readRGBBMP(const char* filename, unsigned char inputImage[][SIZE][RGB])
+int readRGBBMP(char* filename, unsigned char inputImage[][SIZE][RGB])
 {
   uint8 type[2];
   int headersize = 0;
@@ -64,7 +64,9 @@ int readRGBBMP(const char* filename, unsigned char inputImage[][SIZE][RGB])
   if (!(file=fopen(filename,"rb")))
 	{
 	  cout << "Cannot open file: " << filename <<endl;
-	  return(1);
+	  cout << "Please enter a valid file name:\n>>";
+  	  cin >> filename;
+	  strcat(filename, ".bmp");
 	}
 
   fread(type, sizeof(unsigned char), 0x2, file);
