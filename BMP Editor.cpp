@@ -266,34 +266,46 @@ void merge() {
 }
 
 //_________________________________________
-void rotate() {
-    int degree;
-    cout << "Enter the degree you want the image be rotated by :";
-    cin >> degree;
-    if (degree == 270) {
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                new_image[255 - j][i] = image[i][j];
-            }
-        }
-    } else if (degree == 180) {
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                new_image[255 - i][255 - j] = image[i][j];
-            }
-        }
-    } else if (degree == 90) {
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                new_image[j][255 - i] = image[i][j];
-            }
-        }
-    }
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
-            image[i][j] = new_image[i][j];
-        }
-    }
+  void rotate() {
+      string degree;
+      cout << "Enter the degree you want the image be rotated by :"<<endl;
+      cin >> degree;
+      while(true){
+          bool is_valid = true;
+          if(degree != "90" and degree != "270" and degree != "180") {
+              is_valid = false;
+          }
+          if(is_valid){
+                  break;
+
+          }
+          cout << "Please enter a valid degree :"<<endl;
+          cin >> degree;
+      }
+      if (degree == "270") {
+          for (int i = 0; i < SIZE; i++) {
+              for (int j = 0; j < SIZE; j++) {
+                  new_image[255 - j][i] = image[i][j];
+              }
+          }
+      } else if (degree == "180") {
+          for (int i = 0; i < SIZE; i++) {
+              for (int j = 0; j < SIZE; j++) {
+                  new_image[255 - i][255 - j] = image[i][j];
+              }
+          }
+      } else if (degree == "90") {
+          for (int i = 0; i < SIZE; i++) {
+              for (int j = 0; j < SIZE; j++) {
+                  new_image[j][255 - i] = image[i][j];
+              }
+          }
+      }
+      for (int i = 0; i < SIZE; i++) {
+          for (int j = 0; j < SIZE; j++) {
+              image[i][j] = new_image[i][j];
+          }
+      }
     saved = false;
 }
 
