@@ -556,6 +556,11 @@ void filter_a() {
             "\n>>";
     char choice;
     cin >> choice;
+    choice = tolower(choice);
+    while (choice != 'd' && choice != 'u' && choice != 'l' && choice != 'r') {
+        cout << "Please, enter a valid choice: ";
+        cin >> choice;
+    }
     if (choice == 'd') {
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {

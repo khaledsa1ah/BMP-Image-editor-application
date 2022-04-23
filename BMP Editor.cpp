@@ -451,7 +451,7 @@ void filter_a() {
             "\n>>";
     char choice;
     cin >> choice;
-    tolower(choice);
+    choice = tolower(choice);
     while (choice != 'd' && choice != 'u' && choice != 'l' && choice != 'r') {
         cout << "Please, enter a valid choice: ";
         cin >> choice;
