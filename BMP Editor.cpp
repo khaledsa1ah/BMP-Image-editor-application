@@ -1,4 +1,4 @@
-// FCI – Programming 1 – 2022 - Assignment 3 
+// FCI – Programming 1 – 2022 - Assignment 3
 // Program Name: BMP Image Editor.cpp
 // Last Modification Date: 02-04-2022
 // Author1 and ID and Group: Aya Ali Hassan & 20210083 & A
@@ -20,7 +20,11 @@ unsigned char new_image[SIZE][SIZE];
 
 void loadImage();
 
+void load_2_images();
+
 void saveImage();
+
+bool exit_or_save();
 
 void BW();
 
@@ -50,6 +54,9 @@ void enlarge_image();
 
 void shrink_image();
 
+
+bool saved = false;
+
 int main() {
     cout << "Ahlan ya user ya habibi \uF04A\n";
     loadImage();
@@ -70,39 +77,52 @@ int main() {
                 "s- Save the image to a file(demo)\n"
                 "0- Exit\n"
                 ">>";
-        char option;
+
+        string option;
         cin >> option;
 
-        if (tolower(option) == 'a')
+        regex validOption("[0-9sSa-cA-C]");
+        while(!regex_match(option, validOption)){
+            cout << "Please enter an option from the previous list\n>>";
+            cin >> option;
+        }
+
+
+        if (tolower(option[0]) == 'a')
             filter_a();
-        else if (tolower(option) == 'b')
+        else if (tolower(option[0]) == 'b')
             filter_b();
-        else if (tolower(option) == 'c')
+        else if (tolower(option[0]) == 'c')
             filter_c();
-        else if (tolower(option) == 's')
-            saveImage();
-        else if (option == '1')
+        else if (option == "1")
             BW();
-        else if (option == '2')
+        else if (option == "2")
             invert();
-        else if (option == '3')
+        else if (option == "3")
             merge();
-        else if (option == '4')
+        else if (option == "4")
             flip();
-        else if (option == '5')
+        else if (option == "5")
             darkandLight();
-        else if (option == '6')
+        else if (option == "6")
             rotate();
-        else if (option == '7')
+        else if (option == "7")
             detect_edges();
-        else if (option == '8')
+        else if (option == "8")
             enlarge_image();
-        else if (option == '9')
+        else if (option == "9")
             shrink_image();
-        else if (option == '0')
-            return 0;
+        else if (option == "0"){
+            if(exit_or_save())
+                return 0;
+        }
+        else if (tolower(option[0]) == 's') {
+            saveImage();
+            saved = true;
+        }
         cout << "\n_______________________________________________________________\n";
     }
+
 }
 
 //_________________________________________
@@ -146,6 +166,32 @@ void saveImage() {
     // Add to it .bmp extension and load image
     strcat(imageFileName, ".bmp");
     writeGSBMP(imageFileName, image);
+
+    saved = true;
+}
+
+//_________________________________________
+
+bool exit_or_save(){
+
+    if(!saved){
+        cout << "Are you sure you want to exit without saving?\nPress 0 to exit\nPress 1 to save and exit\nPress 2 to return back>>";
+        char choice;
+        cin >> choice;
+        while(choice != '0' && choice != '1' && choice != '2'){
+            cout << "Please enter a valid choice\n>>";
+            cin >> choice;
+        }
+        if(choice == '2')
+            return false;
+        else if(choice == '1'){
+            saveImage();
+            return true;
+        }
+    }
+
+    return true;
+
 }
 
 //_________________________________________
@@ -169,6 +215,7 @@ void darkandLight() {
             image[i][j] = new_image[i][j];
         }
     }
+    saved = false;
 }
 
 //_________________________________________
@@ -199,6 +246,7 @@ void BW() {
                 j = 0;
         }
     }
+    saved = false;
 }
 
 //_________________________________________
@@ -214,37 +262,51 @@ void merge() {
             image[i][j] = new_image[i][j];
         }
     }
+    saved = false;
 }
 
 //_________________________________________
-void rotate() {
-    int degree;
-    cout << "Enter the degree you want the image be rotated by :";
-    cin >> degree;
-    if (degree == 270) {
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                new_image[255 - j][i] = image[i][j];
-            }
-        }
-    } else if (degree == 180) {
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                new_image[255 - i][255 - j] = image[i][j];
-            }
-        }
-    } else if (degree == 90) {
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                new_image[j][255 - i] = image[i][j];
-            }
-        }
-    }
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
-            image[i][j] = new_image[i][j];
-        }
-    }
+  void rotate() {
+      string degree;
+      cout << "Enter the degree you want the image be rotated by :"<<endl;
+      cin >> degree;
+      while(true){
+          bool is_valid = true;
+          if(degree != "90" and degree != "270" and degree != "180") {
+              is_valid = false;
+          }
+          if(is_valid){
+                  break;
+
+          }
+          cout << "Please enter a valid degree :"<<endl;
+          cin >> degree;
+      }
+      if (degree == "270") {
+          for (int i = 0; i < SIZE; i++) {
+              for (int j = 0; j < SIZE; j++) {
+                  new_image[255 - j][i] = image[i][j];
+              }
+          }
+      } else if (degree == "180") {
+          for (int i = 0; i < SIZE; i++) {
+              for (int j = 0; j < SIZE; j++) {
+                  new_image[255 - i][255 - j] = image[i][j];
+              }
+          }
+      } else if (degree == "90") {
+          for (int i = 0; i < SIZE; i++) {
+              for (int j = 0; j < SIZE; j++) {
+                  new_image[j][255 - i] = image[i][j];
+              }
+          }
+      }
+      for (int i = 0; i < SIZE; i++) {
+          for (int j = 0; j < SIZE; j++) {
+              image[i][j] = new_image[i][j];
+          }
+      }
+    saved = false;
 }
 
 //_________________________________________
@@ -254,6 +316,7 @@ void invert() {
             j = 255 - j;
         }
     }
+    saved = false;
 }
 
 //_________________________________________
@@ -281,123 +344,135 @@ void flip() {
             image[i][j] = new_image[i][j];
         }
     }
+    saved = false;
 }
 
 //_________________________________________
-void filter_b() {
-    string order;
-    unsigned char Quarter_1[SIZE][SIZE];
-    unsigned char Quarter_2[SIZE][SIZE];
-    unsigned char Quarter_3[SIZE][SIZE];
-    unsigned char Quarter_4[SIZE][SIZE];
-    cout << "Enter the order of quarters you want the image to be ordered by :" << endl;
-    getline(cin >> ws, order, '\n');
-    for (int i = 0; i < order.length(); i++) {
-        if (order[i] == ' ') {
-            order.erase(i, 1);
-        }
-    }
-    for (int i = 0; i < 4; i++) {
-        while (order[i] != '1' and order[i] != '2' and order[i] != '3' and order[i] != '4') {
-            cout << "Please enter a valid order :" << endl;
-            getline(cin >> ws, order, '\n');
-            for (int i = 0; i < order.length(); i++) {
-                if (order[i] == ' ') {
-                    order.erase(i, 1);
-                }
-            }
-        }
-    }
-    for (int i = 0; i < 128; i++) {
-        for (int j = 0; j < 128; j++) {
-            Quarter_1[i][j] = image[i][j];
-        }
-    }
-    for (int i = 0; i < 128; i++) {
-        for (int j = 128; j < 256; j++) {
-            Quarter_2[i][j] = image[i][j];
-        }
-    }
-    for (int i = 128; i < 256; i++) {
-        for (int j = 0; j < 128; j++) {
-            Quarter_3[i][j] = image[i][j];
+  void filter_b() {
+      string order;
+      unsigned char Quarter_1[SIZE][SIZE];
+      unsigned char Quarter_2[SIZE][SIZE];
+      unsigned char Quarter_3[SIZE][SIZE];
+      unsigned char Quarter_4[SIZE][SIZE];
+      cout << "Enter the order of quarters you want the image to be ordered by :" << endl;
+      getline(cin >> ws, order, '\n');
+      for (int i = 0; i < order.length(); i++) {
+          if (order[i] == ' ') {
+              order.erase(i, 1);
+              i--;
+          }
+      }
+      while(true) {
+          bool is_valid = true;
+          if (order.length() == 4) {
+              for (int i = 0; i < 4; i++) {
+                  if (order[i] < '1' || order[i] > '4') {
+                      is_valid = false;
+                  }
+              }
+              if (is_valid) {
+                  break;
+              }
+          }
+          cout << "Please enter a valid order :";
+          getline(cin >> ws, order, '\n');
+          for (int i = 0; i < order.length(); i++) {
+              if (order[i] == ' ') {
+                  order.erase(i, 1);
+                  i--;
+              }
+          }
+      }
+      for (int i = 0; i < 128; i++) {
+          for (int j = 0; j < 128; j++) {
+              Quarter_1[i][j] = image[i][j];
+          }
+      }
+      for (int i = 0; i < 128; i++) {
+          for (int j = 128; j < 256; j++) {
+              Quarter_2[i][j] = image[i][j];
+          }
+      }
+      for (int i = 128; i < 256; i++) {
+          for (int j = 0; j < 128; j++) {
+              Quarter_3[i][j] = image[i][j];
 
-        }
-    }
-    for (int i = 128; i < 256; i++) {
-        for (int j = 128; j < 256; j++) {
-            Quarter_4[i][j] = image[i][j];
-        }
-    }
-    for (int k = 0; k < 4; k++) {
-        if (k == 0) {
-            for (int i = 0; i < 128; i++) {
-                for (int j = 0; j < 128; j++) {
-                    if (order[0] == '1') {
-                        new_image[i][j] = Quarter_1[i][j];
-                    } else if (order[0] == '2') {
-                        new_image[i][j] = Quarter_2[i][128 + j];
-                    } else if (order[0] == '3') {
-                        new_image[i][j] = Quarter_3[128 + i][j];
-                    } else if (order[0] == '4') {
-                        new_image[i][j] = Quarter_4[128 + i][128 + j];
-                    }
-                }
-            }
+          }
+      }
+      for (int i = 128; i < 256; i++) {
+          for (int j = 128; j < 256; j++) {
+              Quarter_4[i][j] = image[i][j];
+          }
+      }
+      for (int k = 0; k < 4; k++) {
+          if (k == 0) {
+              for (int i = 0; i < 128; i++) {
+                  for (int j = 0; j < 128; j++) {
+                      if (order[0] == '1') {
+                          new_image[i][j] = Quarter_1[i][j];
+                      } else if (order[0] == '2') {
+                          new_image[i][j] = Quarter_2[i][128 + j];
+                      } else if (order[0] == '3') {
+                          new_image[i][j] = Quarter_3[128 + i][j];
+                      } else if (order[0] == '4') {
+                          new_image[i][j] = Quarter_4[128 + i][128 + j];
+                      }
+                  }
+              }
 
-        } else if (k == 1) {
-            for (int i = 0; i < 128; i++) {
-                for (int j = 128; j < 256; j++) {
-                    if (order[1] == '1') {
-                        new_image[i][j] = Quarter_1[i][j - 128];
-                    } else if (order[1] == '2') {
-                        new_image[i][j] = Quarter_2[i][j];
-                    } else if (order[1] == '3') {
-                        new_image[i][j] = Quarter_3[128 + i][j - 128];
-                    } else if (order[1] == '4') {
-                        new_image[i][j] = Quarter_4[128 + i][j];
-                    }
-                }
-            }
+          } else if (k == 1) {
+              for (int i = 0; i < 128; i++) {
+                  for (int j = 128; j < 256; j++) {
+                      if (order[1] == '1') {
+                          new_image[i][j] = Quarter_1[i][j - 128];
+                      } else if (order[1] == '2') {
+                          new_image[i][j] = Quarter_2[i][j];
+                      } else if (order[1] == '3') {
+                          new_image[i][j] = Quarter_3[128 + i][j - 128];
+                      } else if (order[1] == '4') {
+                          new_image[i][j] = Quarter_4[128 + i][j];
+                      }
+                  }
+              }
 
 
-        } else if (k == 2) {
-            for (int i = 128; i < 256; i++) {
-                for (int j = 0; j < 128; j++) {
-                    if (order[2] == '1') {
-                        new_image[i][j] = Quarter_1[i - 128][j];
-                    } else if (order[2] == '2') {
-                        new_image[i][j] = Quarter_2[i - 128][128 + j];
-                    } else if (order[2] == '3') {
-                        new_image[i][j] = Quarter_3[i][j];
-                    } else if (order[2] == '4') {
-                        new_image[i][j] = Quarter_4[i][128 + j];
-                    }
-                }
-            }
-        } else if (k == 3) {
-            for (int i = 128; i < 256; i++) {
-                for (int j = 128; j < 256; j++) {
-                    if (order[3] == '1') {
-                        new_image[i][j] = Quarter_1[i - 128][j - 128];
-                    } else if (order[3] == '2') {
-                        new_image[i][j] = Quarter_2[i - 128][j];
-                    } else if (order[3] == '3') {
-                        new_image[i][j] = Quarter_3[i][j - 128];
-                    } else if (order[3] == '4') {
-                        new_image[i][j] = Quarter_4[i][j];
-                    }
-                }
-            }
-        }
-    }
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
-            image[i][j] = new_image[i][j];
-        }
-    }
-}
-
+          } else if (k == 2) {
+              for (int i = 128; i < 256; i++) {
+                  for (int j = 0; j < 128; j++) {
+                      if (order[2] == '1') {
+                          new_image[i][j] = Quarter_1[i - 128][j];
+                      } else if (order[2] == '2') {
+                          new_image[i][j] = Quarter_2[i - 128][128 + j];
+                      } else if (order[2] == '3') {
+                          new_image[i][j] = Quarter_3[i][j];
+                      } else if (order[2] == '4') {
+                          new_image[i][j] = Quarter_4[i][128 + j];
+                      }
+                  }
+              }
+          } else if (k == 3) {
+              for (int i = 128; i < 256; i++) {
+                  for (int j = 128; j < 256; j++) {
+                      if (order[3] == '1') {
+                          new_image[i][j] = Quarter_1[i - 128][j - 128];
+                      } else if (order[3] == '2') {
+                          new_image[i][j] = Quarter_2[i - 128][j];
+                      } else if (order[3] == '3') {
+                          new_image[i][j] = Quarter_3[i][j - 128];
+                      } else if (order[3] == '4') {
+                          new_image[i][j] = Quarter_4[i][j];
+                      }
+                  }
+              }
+          }
+      }
+      for (int i = 0; i < SIZE; i++) {
+          for (int j = 0; j < SIZE; j++) {
+              image[i][j] = new_image[i][j];
+          }
+      }
+      saved = false;
+  }
 //_________________________________________
 void filter_c() {
     string radius_;
@@ -443,6 +518,7 @@ void filter_c() {
             image[i][j] = new_image[i][j];
         }
     }
+    saved = false;
 }
 
 //_________________________________________
@@ -462,8 +538,7 @@ void filter_a() {
                 image[i][j] = image[255 - i][j];
             }
         }
-    }
-    else if (choice == 'u') {
+    } else if (choice == 'u') {
 
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
@@ -485,47 +560,57 @@ void filter_a() {
             }
         }
     }
+    saved = false;
 }
 
 //_________________________________________
-void enlarge_image() {
-    int Quarter;
-    cout << "Enter the quarter you want to enlarge :";
-    cin >> Quarter;
-    while (Quarter > 5 or Quarter < 0) {
-        cout << "Enter a valid number :";
-        cin >> Quarter;
-    }
-    if (Quarter == 1) {
-        for (int i = 0; i < 256; i++) {
-            for (int j = 0; j < 256; j++) {
-                new_image[i][j] = image[i / 2][j / 2];
-            }
-        }
-    } else if (Quarter == 2) {
-        for (int i = 0; i < 256; i++) {
-            for (int j = 0; j < 256; j++) {
-                new_image[i][256 - j] = image[i][256 - j / 2];
-            }
-        }
-    } else if (Quarter == 3) {
-        for (int i = 0; i < 256; i++) {
-            for (int j = 0; j < 256; j++) {
-                new_image[256 - i][j] = image[256 - i / 2][j / 2];
-            }
-        }
-    } else if (Quarter == 4) {
-        for (int i = 0; i < 256; i++) {
-            for (int j = 0; j < 256; j++) {
-                new_image[256 - i][256 - j] = image[256 - i / 2][256 - j / 2];
-            }
-        }
-    }
-    for (int i = 0; i < SIZE; i++) {
+  void enlarge_image() {
+      string Quarter;
+      cout << "Enter the quarter you want to enlarge :"<<endl;
+      cin >> Quarter;
+      while (true) {
+          bool is_valid = true;
+          if(Quarter != "1" and Quarter != "2" and Quarter != "3" and Quarter != "4"){
+              is_valid = false;
+          }
+          if(is_valid){
+              break;
+          }
+          cout << "Enter a valid number :"<<endl;
+          cin >> Quarter;
+      }
+      if (Quarter == "1") {
+          for (int i = 0; i < 256; i++) {
+              for (int j = 0; j < 256; j++) {
+                  new_image[i][j] = image[i / 2][j / 2];
+              }
+          }
+      } else if (Quarter == "2") {
+          for (int i = 0; i < 256; i++) {
+              for (int j = 0; j < 256; j++) {
+                  new_image[i][256 - j] = image[i][256 - j / 2];
+              }
+          }
+      } else if (Quarter == "3") {
+          for (int i = 0; i < 256; i++) {
+              for (int j = 0; j < 256; j++) {
+                  new_image[256 - i][j] = image[256 - i / 2][j / 2];
+              }
+          }
+      } else if (Quarter == "4") {
+          for (int i = 0; i < 256; i++) {
+              for (int j = 0; j < 256; j++) {
+                  new_image[256 - i][256 - j] = image[256 - i / 2][256 - j / 2];
+              }
+          }
+      }
+       for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
-            image[i][j] = new_image[i][j];
+                image[i][j] = new_image[i][j];
         }
     }
+
+    saved = false;
 }
 
 //_________________________________________
@@ -540,61 +625,55 @@ void shrink_image() {
     cin >> choice;
 
     regex validChoice("0*[1-9][0-9]*");
-    while (!regex_match(choice, validChoice)) {
+    while(!regex_match(choice, validChoice)){
         cout << "Please enter a valid choice:\n";
         cin >> choice;
     }
 
     nCombinedPixels = stoi(choice);
 
-    // shrinking horizontally (a row will have fewer columns)
-    for (auto &i: image) { // loop over all rows of new image
+    //the start of the columns (in the same row) to take their average
+    int st_row = 0;
 
-        //the start of the columns (in the same row) to take their average
-        int st = 0;
+    for(int i = 0; i < SIZE/nCombinedPixels; i++){ // loop over all rows of new image
 
-        for (int j = 0; j < SIZE / nCombinedPixels; j++) { // loop over the needed columns to fill
+        //the start of the rows (in the same col) to take their average
+        int st_col = 0;
 
-            // the average color in the new pixel
-            int ave = 0;
-            for (int k = st; k < st + nCombinedPixels; k++) {
-                ave += i[k];
-            }
+        for(int j = 0; j < SIZE/nCombinedPixels; j++){ // loop over the needed columns to fill
 
-            // save the new color in the original image (as we're not done of shrinking yet)
-            i[j] = ave / (nCombinedPixels);
+                // the average color in the new pixel
+                int ave = 0;
 
-            // the new start of the next 2 columns to get their average
-            st += nCombinedPixels;
+                // getting the average of all the pixels that completes a square of nCombined*nCombined
+                for(int k = st_row; k < st_row + nCombinedPixels; k++) {
+                    for (int l = st_col; l < st_col + nCombinedPixels; l++) {
+                        ave += image[k][l];
+                    }
+                }
+
+
+                // save the new color in the new image
+                new_image[i][j] = ave/(nCombinedPixels*nCombinedPixels);
+
+
+
+            // the new start of the next 2 columns to get their average and put it in the next col(j) in same row(i)
+            st_col += nCombinedPixels;
+
         }
+
+        // the new start of the next 2 rows to get their average and put it in the next row(i) in same row(j)
+        st_row += nCombinedPixels;
+
     }
 
-    // shrinking vertically after the horizontally (a column will have fewer rows)
-    for (int i = 0; i < SIZE / nCombinedPixels; i++) { // loop over needed columns of new image to fill
-
-        // the start of the rows (in the same column) to take their average
-        int st = 0;
-
-        for (int j = 0; j < SIZE / nCombinedPixels; j++) {
-
-            // the average color in the new pixel
-            int ave = 0;
-            for (int k = st; k < st + nCombinedPixels; k++) {
-                ave += image[k][i];
-            }
-
-            // save the new color in the new image (shrinking is done for this pixel)
-            new_image[j][i] = ave / (nCombinedPixels);
-
-            // the new start of the next 2 rows to get their average
-            st += nCombinedPixels;
-        }
-    }
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
-            image[i][j] = new_image[i][j];
+                image[i][j] = new_image[i][j];
         }
     }
+    saved = false;
 }
 
 //_________________________________________
@@ -626,4 +705,5 @@ void detect_edges() {
             image[i][j] = new_image[i][j];
         }
     }
+    saved = false;
 }

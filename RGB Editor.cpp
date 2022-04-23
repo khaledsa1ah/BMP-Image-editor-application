@@ -56,7 +56,7 @@ bool saved = false;
 //_________________________________________
 
 int main() {
-    
+
     cout << "Ahlan ya user ya habibi \uF04A\n";
     loadImage();
     while (true) {
@@ -76,7 +76,7 @@ int main() {
                 "s- Save the image to a file\n"
                 "0- Exit\n"
                 ">>";
-        
+
         string option;
         cin >> option;
 
@@ -121,7 +121,7 @@ int main() {
         }
         cout << "\n_______________________________________________________________\n";
     }
-     
+
 }
 
 
@@ -172,7 +172,7 @@ void saveImage() {
     // Add to it .bmp extension and load image
     strcat(imageFileName, ".bmp");
     writeRGBBMP(imageFileName, image);
-    
+
     saved = true;
 }
 
@@ -195,7 +195,7 @@ bool exit_or_save(){
             return true;
         }
     }
-    
+
     return true;
 
 }
@@ -385,43 +385,53 @@ void darken(){
 }
 
 //_________________________________________
-
 void rotate() {
-    int degree;
-    cout << "Enter the degree you want the image be rotated by :";
-    cin >> degree;
-    if (degree == 270) {
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                for (int k = 0; k < 3; k++) {
-                    new_image[255 - j][i][k] = image[i][j][k];
-                }
-            }
-        }
-    } else if (degree == 180) {
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                for (int k = 0; k < 3; k++) {
-                    new_image[255 - i][255 - j][k] = image[i][j][k];
-                }
-            }
-        }
-    } else if (degree == 90) {
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                for (int k = 0; k < 3; k++) {
-                    new_image[j][255 - i][k] = image[i][j][k];
-                }
-            }
-        }
-    }
-    for (int i = 0; i < SIZE; i++) {
+      string degree;
+      cout << "Enter the degree you want the image be rotated by :"<<endl;
+      cin >> degree;
+      while(true){
+          bool is_valid = true;
+          if(degree != "90" and degree != "270" and degree != "180") {
+              is_valid = false;
+          }
+          if(is_valid){
+                  break;
+
+          }
+          cout << "Please enter a valid degree :"<<endl;
+          cin >> degree;
+      }
+         if (degree == "270") {
+             for (int i = 0; i < SIZE; i++) {
+                 for (int j = 0; j < SIZE; j++) {
+                     for(int k=0;k<3;k++) {
+                         new_image[255 - j][i][k]= image[i][j][k];
+                     }
+                 }
+             }
+         } else if (degree == "180") {
+             for (int i = 0; i < SIZE; i++) {
+                 for (int j = 0; j < SIZE; j++) {
+                     for(int k=0;k<3;k++) {
+                         new_image[255 - i][255 - j][k] = image[i][j][k];
+                     }
+                 }
+             }
+         } else if (degree == "90") {
+             for (int i = 0; i < SIZE; i++) {
+                 for (int j = 0; j < SIZE; j++) {
+                     for(int k=0;k<3;k++) {
+                         new_image[j][255 - i][k]= image[i][j][k];
+                     }
+                 }
+             }
+         }
+     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
             for (int k = 0; k < 3; ++k)
                 image[i][j][k] = new_image[i][j][k];
         }
     }
-
     saved = false;
 
 }
@@ -429,7 +439,7 @@ void rotate() {
 //_________________________________________
 
 void shrink_image() {
-    
+
     cout << "How much do you want to shrink your image?\n"
             "The program will shrink it for 1/(a) of the image original dimensions\n"
             "Enter a:";
@@ -496,48 +506,56 @@ void shrink_image() {
 
 //_________________________________________
 
-void enlarge_image() {
-
-    int Quarter;
-    cout << "Enter the quarter you want to enlarge :";
-    cin >> Quarter;
-    while (Quarter > 5 or Quarter < 0) {
-        cout << "Enter a valid number :";
-        cin >> Quarter;
-    }
-    if (Quarter == 1) {
-        for (int i = 0; i < 256; i++) {
-            for (int j = 0; j < 256; j++) {
-                for (int k = 0; k < 3; k++) {
-                    new_image[i][j][k] = image[i / 2][j / 2][k];
-                }
-            }
-        }
-    } else if (Quarter == 2) {
-        for (int i = 0; i < 256; i++) {
-            for (int j = 0; j < 256; j++) {
-                for (int k = 0; k < 3; k++) {
-                    new_image[i][256 - j][k] = image[i][256 - j / 2][k];
-                }
-            }
-        }
-    } else if (Quarter == 3) {
-        for (int i = 0; i < 256; i++) {
-            for (int j = 0; j < 256; j++) {
-                for (int k = 0; k < 3; k++) {
-                    new_image[256 - i][j][k] = image[256 - i / 2][j / 2][k];
-                }
-            }
-        }
-    } else if (Quarter == 4) {
-        for (int i = 0; i < 256; i++) {
-            for (int j = 0; j < 256; j++) {
-                for (int k = 0; k < 3; k++) {
-                    new_image[256 - i][256 - j][k] = image[256 - i / 2][256 - j / 2][k];
-                }
-            }
-        }
-    }
+     void enlarge_image() {
+         string Quarter;
+         cout << "Enter the quarter you want to enlarge :";
+         cin >> Quarter;
+         while (true) {
+          bool is_valid = true;
+          if(Quarter != "1" and Quarter != "2" and Quarter != "3" and Quarter != "4"){
+              is_valid = false;
+          }
+          if(is_valid){
+              break;
+          }
+          cout << "Enter a valid number :"<<endl;
+          cin >> Quarter;
+      }
+         if(Quarter=="1"){
+             for(int i=0;i<256;i++){
+                 for(int j=0;j<256;j++){
+                     for(int k=0;k<3;k++) {
+                         new_image[i][j][k] = image[i / 2][j / 2][k];
+                     }
+                 }}
+         }
+         else if(Quarter=="2"){
+             for(int i=0;i<256;i++){
+                 for(int j=0;j<256;j++){
+                     for(int k=0;k<3;k++) {
+                         new_image[i][256 - j][k] = image[i][256 - j / 2][k];
+                     }
+                 }
+             }
+         }
+         else if(Quarter=="3"){
+             for(int i=0;i<256;i++){
+                 for(int j=0;j<256;j++){
+                     for(int k=0;k<3;k++) {
+                         new_image[256 - i][j][k]= image[256 - i / 2][j / 2][k];
+                     }
+                 }
+             }
+         }
+         else if(Quarter=="4"){
+             for(int i=0;i<256;i++){
+                 for(int j=0;j<256;j++){
+                     for(int k=0;k<3;k++) {
+                         new_image[256 - i][256 - j][k] = image[256 - i / 2][256 - j / 2][k];
+                     }
+                 }
+             }
+         }
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
             for (int k = 0; k < 3; ++k)
@@ -601,7 +619,6 @@ void filter_a() {
 //_________________________________________
 
 void filter_b() {
-
     string order;
     unsigned char Quarter_1[SIZE][SIZE][RGB];
     unsigned char Quarter_2[SIZE][SIZE][RGB];
@@ -612,19 +629,32 @@ void filter_b() {
     for (int i = 0; i < order.length(); i++) {
         if (order[i] == ' ') {
             order.erase(i, 1);
+            i--;
         }
     }
-    for (int i = 0; i < 4; i++) {
-        while (order[i] != '1' and order[i] != '2' and order[i] != '3' and order[i] != '4') {
-            cout << "Please enter a valid order :" << endl;
-            getline(cin >> ws, order, '\n');
-            for (int i = 0; i < order.length(); i++) {
-                if (order[i] == ' ') {
-                    order.erase(i, 1);
+    while(true) {
+        bool is_valid = true;
+        if (order.length() == 4) {
+            for (int i = 0; i < 4; i++) {
+                if (order[i] < '1' || order[i] > '4') {
+                    is_valid = false;
                 }
+            }
+            if (is_valid) {
+                break;
+            }
+        }
+        cout << "Please enter a valid order :";
+        getline(cin >> ws, order, '\n');
+        for (int i = 0; i < order.length(); i++) {
+            if (order[i] == ' ') {
+                order.erase(i, 1);
+                i--;
             }
         }
     }
+
+
     for (int i = 0; i < 128; i++) {
         for (int j = 0; j < 128; j++) {
             for (int k = 0; k < 3; k++) {
