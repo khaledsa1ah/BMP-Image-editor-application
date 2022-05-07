@@ -1,5 +1,4 @@
-C:/Users/KHALED/Documents/GitHub/Assignment-3/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/KHALED/Documents/GitHub/Assignment-3/cmake-build-debug/CMakeFiles/BMP.dir
-C:/Users/KHALED/Documents/GitHub/Assignment-3/cmake-build-debug/CMakeFiles/RGB.dir
-C:/Users/KHALED/Documents/GitHub/Assignment-3/cmake-build-debug/CMakeFiles/project.dir
-C:/Users/KHALED/Documents/GitHub/Assignment-3/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+F:/FCAI/prog1/BMP-Image-editor-application/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+F:/FCAI/prog1/BMP-Image-editor-application/cmake-build-debug/CMakeFiles/Grey-BmpEditor.dir
+F:/FCAI/prog1/BMP-Image-editor-application/cmake-build-debug/CMakeFiles/RGB-BmpEditor.dir
+F:/FCAI/prog1/BMP-Image-editor-application/cmake-build-debug/CMakeFiles/edit_cache.dir
