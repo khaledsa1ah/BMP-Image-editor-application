@@ -1,5 +1,5 @@
 # BmpEditor Program 
-Made by: ***Khaled Salah - Aya Ali - Youssef Morad***
+Made by: ***[Khaled Salah](https://github.com/khaledsa1ah) - [Aya Ali](https://github.com/ayaaalli) - [Youssef Morad](https://github.com/YoussefMorad1)***
 
 Requested by: *Dr. Mohammed El-Ramly in Structured Programming course (Assingment 3)*
 
