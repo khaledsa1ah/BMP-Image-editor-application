@@ -1,7 +1,6 @@
 # BmpEditor Program 
-Made by: ***[Khaled Salah](https://github.com/khaledsa1ah) - [Aya Ali](https://github.com/ayaaalli) - [Youssef Morad](https://github.com/YoussefMorad1)***
+Made by: ***[Khaled Salah](https://github.com/khaledsa1ah) - [Aya Ali]([https://github.com/ayaaalli](https://github.com/AyaA1i)) - [Youssef Morad](https://github.com/YoussefMorad1)***
 
-Requested by: *Dr. Mohammed El-Ramly in Structured Programming course (Assingment 3)*
 
 ## The Idea of the BmpEditor Program 
 
